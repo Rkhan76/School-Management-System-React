@@ -13,7 +13,7 @@ function SideBarComponent() {
         </div>
         <img className="h-8 w-8 mt-1.5" src={forwardIcon} alt="forwardIcon" />
       </div>
-      <hr style={{ borderColor: 'black' }} />
+      <hr style={{ borderColor: 'black', width:"250px" }} />
     </>
   )
 }
