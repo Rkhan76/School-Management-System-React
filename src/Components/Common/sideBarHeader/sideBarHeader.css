@@ -1,0 +1,8 @@
+.sideBarHeader{
+    display: flex;
+    justify-content: space-around;
+    background-color: wheat;
+    width: 250px;
+    gap: 120px;
+    padding: 8px;
+}

@@ -1,0 +1,7 @@
+.sideBarComponent{
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 6px;
+    background-color: red;
+}
