@@ -2,22 +2,22 @@ import React from 'react'
 import './studentDashboard.css'
 import Navbar from '../Common/Navbar/Navbar'
 import StudentSideBar from './StudentSideBar'
-import StudentMainContent from './studentMainContent'
+import DashboardPageComponents from '../Common/dashboardPageComponents/DashboardPageComponents'
 
 function StudentDashboard() {
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="flex">
       <StudentSideBar />
-      <div style={{ width: '100%' }}>
+      <div className="w-full">
         <Navbar />
         <div className="dashboardContentContainer">
-          <StudentMainContent />
-          <StudentMainContent />
-          <StudentMainContent />
-          <StudentMainContent />
-          <StudentMainContent />
-          <StudentMainContent />
-          <StudentMainContent />
+          <DashboardPageComponents />
+          <DashboardPageComponents />
+          <DashboardPageComponents />
+          <DashboardPageComponents />
+          <DashboardPageComponents />
+          <DashboardPageComponents />
+          <DashboardPageComponents />
         </div>
       </div>
     </div>
