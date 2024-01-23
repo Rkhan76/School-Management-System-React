@@ -1,0 +1,8 @@
+.dashboardContentContainer{
+    /* background-color: #ffffff; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding-top: 100px;
+}
