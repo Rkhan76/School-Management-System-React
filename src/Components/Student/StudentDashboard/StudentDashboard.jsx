@@ -1,8 +1,8 @@
 import React from 'react'
 import './studentDashboard.css'
-import Navbar from '../Common/Navbar/Navbar'
-import StudentSideBar from './StudentSideBar'
-import DashboardPageComponents from '../Common/dashboardPageComponents/DashboardPageComponents'
+import Navbar from '../../Common/Navbar/Navbar'
+import StudentSideBar from '../StudentSideBar'
+import DashboardPageComponents from '../../Common/dashboardPageComponents/DashboardPageComponents'
 
 function StudentDashboard() {
   return (

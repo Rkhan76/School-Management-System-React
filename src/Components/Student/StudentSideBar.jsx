@@ -5,7 +5,7 @@ import SideBarComponent from '../Common/sideBarComponent/SideBarComponent'
 
 function StudentSideBar() {
   return (
-    <div className="hello">
+    <div className="studentSideBar">
       <SideBarHeader />
       <SideBarComponent />
       <SideBarComponent />

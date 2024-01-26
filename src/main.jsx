@@ -1,12 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Navbar from './Components/Common/Navbar/Navbar.jsx'
 import './index.css'
-import StudentSideBar from './Components/Student/StudentSideBar.jsx'
-import StudentDashboard from './Components/Student/StudentDashboard.jsx'
+import StudentDashboard from './Components/Student/StudentDashboard/StudentDashboard.jsx'
+import { Router, RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<StudentDashboard/>}>
+      
+    </Route>
+  )
+)
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <StudentDashboard/>
+    <RouterProvider router={router}/>
   </React.StrictMode>
 )
