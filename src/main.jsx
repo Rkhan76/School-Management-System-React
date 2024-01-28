@@ -14,6 +14,8 @@ import Hllo from './Components/hllo.jsx'
 import Bye from './Components/Bye.jsx'
 import StudentAttendance from './Components/Student/StudentAttendence/StudentAttendence.jsx'
 import StudentProfile from './Components/Student/StudentProfile/StudentProfile.jsx'
+import StudentResult from './Components/Student/StudentResult/StudentResult.jsx'
+import StudentTimeTable from './Components/Student/StudentTimeTable/StudentTimeTable.jsx'
 
 
   
@@ -24,8 +26,10 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<StudentHome />}>
         <Route path="" element={<StudentDashboard />} />
-        <Route path='profile' element={<StudentProfile/>}/>
-        <Route path="attendence" element={<StudentAttendance/>} />
+        <Route path="profile" element={<StudentProfile />} />
+        <Route path="attendence" element={<StudentAttendance />} />
+        <Route path="result" element={<StudentResult />} />
+        <Route path="timetable" element={<StudentTimeTable />} />
       </Route>
       <Route path="/parents" element={<Hllo />}>
         <Route path="bye" element={<Bye />} />
