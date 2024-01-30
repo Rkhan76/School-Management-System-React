@@ -1,8 +1,9 @@
 import React from 'react'
+
 import SideBarHeader from '../../Common/sideBarHeader/SideBarHeader'
 import SideBarComponent from '../../Common/sideBarComponent/SideBarComponent'
 
-function StudentSideBar() {
+function TeacherSideBar() {
   return (
     <div
       className="text-white"
@@ -20,4 +21,4 @@ function StudentSideBar() {
   )
 }
 
-export default StudentSideBar
+export default TeacherSideBar

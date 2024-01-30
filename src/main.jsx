@@ -10,14 +10,15 @@ import {
 import './index.css'
 import StudentDashboard from './Components/Student/StudentDashboard/StudentDashboard.jsx'
 import StudentHome from './Components/Student/StudentHome/StudentHome.jsx'
-import Hllo from './Components/hllo.jsx'
-import Bye from './Components/Bye.jsx'
 import StudentAttendance from './Components/Student/StudentAttendence/StudentAttendence.jsx'
 import StudentProfile from './Components/Student/StudentProfile/StudentProfile.jsx'
 import StudentResult from './Components/Student/StudentResult/StudentResult.jsx'
 import StudentTimeTable from './Components/Student/StudentTimeTable/StudentTimeTable.jsx'
 import StudentAssignment from './Components/Student/StudentAssignment/StudentAssignment.jsx'
 import Notice from './Components/Student/Notice/Notice.jsx'
+import TeacherHome from './Components/Teacher/TeacherHome/TeacherHome.jsx'
+import TeacherSideBar from './Components/Teacher/TeacherSideBar/TeacherSideBar.jsx'
+import TeacherDashboard from './Components/Teacher/TeacherDashboard/TeacherDashboard.jsx'
 
 
   
@@ -26,17 +27,19 @@ import Notice from './Components/Student/Notice/Notice.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<StudentHome />}>
-        <Route path="" element={<StudentDashboard />} />
-        <Route path="profile" element={<StudentProfile />} />
-        <Route path="attendence" element={<StudentAttendance />} />
-        <Route path="result" element={<StudentResult />} />
-        <Route path="timetable" element={<StudentTimeTable />} />
-        <Route path='assignment' element={<StudentAssignment/>} />
-        <Route path='notice' element={<Notice/>} />
-      </Route>
-      <Route path="/parents" element={<Hllo />}>
-        <Route path="bye" element={<Bye />} />
+      <Route path="/">
+        <Route path="student" element={<StudentHome />}>
+          <Route path="" element={<StudentDashboard />}/>
+          <Route path="profile" element={<StudentProfile />} />
+          <Route path="attendence" element={<StudentAttendance />} />
+          <Route path="result" element={<StudentResult />} />
+          <Route path="timetable" element={<StudentTimeTable />} />
+          <Route path="assignment" element={<StudentAssignment />} />
+          <Route path="notice" element={<Notice />} />
+        </Route>
+        <Route path="/teacher" element={<TeacherHome />}>
+          <Route path='' element={<TeacherDashboard/>}/>
+        </Route>
       </Route>
     </>
   )

@@ -7,7 +7,7 @@ import StudentSideBar from '../StudentSidebar/StudentSideBar'
 
 function StudentHome() {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <StudentSideBar />
       <div className="w-full">
         <Navbar />
