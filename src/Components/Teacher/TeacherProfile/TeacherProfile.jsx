@@ -1,30 +1,33 @@
 import React from 'react'
 import profileImage from '../../../assets/profileImage.png'
 
-function ParentsProfile() {
-  const parentsDetailInput = [
+function TeacherProfile() {
+  const teacherDetailInput = [
     {
-      name: 'James Doe',
-      gender: 'Male',
-      occupation: 'Engineer',
-      email: 'james.doe@example.com',
-      address: '456 Oak Street, Suburbia',
-      phoneNumber: '+1 234-567-8901',
-    }
+      teacherId: 'T001',
+      name: 'Ms. Smith',
+      gender: 'Female',
+      email: 'teacher1@example.com',
+      subject: 'Mathematics',
+      class: '10th',
+      section: 'A',
+      experience: '5 years',
+      phoneNumber: '+1 987-654-3210',
+    },
   ]
 
-  const parentsDetails = parentsDetailInput.map((parentdetail)=>{
+  const teacherDetails = teacherDetailInput.map((teacherdetail) => {
     return (
       <div
         className="flex gap-10 p-10 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
-        key={parentdetail.name}
+        key={teacherdetail.name}
       >
         <img src={profileImage} className="h-36 w-36" alt="profileImage" />
         <div>
-          <h1 className="text-3xl">{parentdetail.name}</h1>
+          <h1 className="text-3xl">{teacherdetail.name}</h1>
           <table className="border-collapse w-full mt-4">
             <tbody>
-              {Object.entries(parentdetail).map(([key, value]) => {
+              {Object.entries(teacherdetail).map(([key, value]) => {
                 return (
                   <tr key={key} className="p-2">
                     <td className="p-1.5 font-bold">{key}</td>
@@ -50,13 +53,12 @@ function ParentsProfile() {
       </div>
     )
   })
-        
 
   return (
     <div className="mt-10 p-10 flex justify-center box-border rounded-md">
-      {parentsDetails}
+      {teacherDetails}
     </div>
   )
 }
 
-export default ParentsProfile
+export default TeacherProfile
