@@ -23,6 +23,7 @@ import ParentsHome from './Components/Parents/ParentsHome/ParentsHome.jsx'
 import ParentsDashboard from './Components/Parents/ParentsDashboard/ParentsDashboard.jsx'
 import AdminHome from './Components/Admin/AdminHome/AdminHome.jsx'
 import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard.jsx'
+import ParentsProfile from './Components/Parents/ParentsProfile/ParentsProfile.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="parents" element={<ParentsHome />}>
           <Route path="" element={<ParentsDashboard />} />
+          <Route path='profile' element={<ParentsProfile/>} />
         </Route>
         <Route path="admin" element={<AdminHome/>}>
           <Route path="" element={<AdminDashboard/>} />
