@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import profileImage from '../../../assets/profileImage.png'
+import EditProfileDetail from '../../Common/EditProfileDetail/EditProfileDetail'
 
 function AdminProfile() {
     const adminDetailInput = [
@@ -14,6 +15,39 @@ function AdminProfile() {
         experience: '10 years',
       },
     ]
+
+    const [form, setForm] = useState(null)
+
+    function displayEditForm(e){
+        const oldValue = e.target.innerText
+        switch(e.target.value){
+            case 'address':
+                setForm(
+                  <EditProfileDetail link="./hello" value={oldValue} heading='Update Address'/>
+                )
+                break;
+            case 'email':
+                setForm(
+                  <EditProfileDetail
+                    link="./hello"
+                    value={oldValue}
+                    heading="Update Email Address"
+                  />
+                )
+                break;
+            case 'phoneNumber':
+                setForm(
+                  <EditProfileDetail
+                    link="./hello"
+                    value={oldValue}
+                    heading="Update Phone Number"
+                  />
+                )
+                break;
+            default:
+                setForm(null)
+        }
+    }
 
      const adminDetails = adminDetailInput.map((admindetail) => {
        return (
@@ -36,7 +70,9 @@ function AdminProfile() {
                        key === 'phoneNumber' ? (
                          <td>
                            <button
+                             onClick={displayEditForm}
                              type="button"
+                             value={key}
                              className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1 me-2 dark:focus:ring-yellow-900"
                            >
                              Edit
@@ -56,6 +92,7 @@ function AdminProfile() {
   return (
     <div className="mt-10 p-10 flex justify-center box-border rounded-md">
       {adminDetails}
+      {form}
     </div>
   )
 }
