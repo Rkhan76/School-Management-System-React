@@ -21,6 +21,8 @@ import TeacherSideBar from './Components/Teacher/TeacherSideBar/TeacherSideBar.j
 import TeacherDashboard from './Components/Teacher/TeacherDashboard/TeacherDashboard.jsx'
 import ParentsHome from './Components/Parents/ParentsHome/ParentsHome.jsx'
 import ParentsDashboard from './Components/Parents/ParentsDashboard/ParentsDashboard.jsx'
+import AdminHome from './Components/Admin/AdminHome/AdminHome.jsx'
+import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +42,9 @@ const router = createBrowserRouter(
         </Route>
         <Route path="parents" element={<ParentsHome />}>
           <Route path="" element={<ParentsDashboard />} />
+        </Route>
+        <Route path="admin" element={<AdminHome/>}>
+          <Route path="" element={<AdminDashboard/>} />
         </Route>
       </Route>
     </>
