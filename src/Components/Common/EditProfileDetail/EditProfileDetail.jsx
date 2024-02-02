@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import cutIcon from '../../../assets/cutIcon.svg'
 
-function EditProfileDetail({heading, link, oldValue}) {
-  const [display,setDisplay] = useState('hidden')
-  function displayfun(){
-    console.log('hllo')
-    setDisplay('')
+function EditProfileDetail({ heading, link, oldValue, isShow}) {
+  let [isVisible, setIsVisible] = useState(isShow)
+  console.log(isVisible)
+  console.log(oldValue)
+
+  const handleClose = () => {
+    console.log(isVisible)
+    setIsVisible(false)
   }
 
-  return (
-     <div className={`${display} p-10 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]`}>
+  return isVisible ? (
+    <div className="p-10 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
       <p>{heading}</p>
-      <form action="" className="flex gap-5">
+      <form action={link} className="flex gap-5">
         <input type="text" value={oldValue} />
         <button
           type="submit"
@@ -20,10 +23,11 @@ function EditProfileDetail({heading, link, oldValue}) {
           Update
         </button>
       </form>
-      <button type="button" onClick={displayfun()}>Close</button>
+      <button type="button" onClick={handleClose}>
+        Close
+      </button>
     </div>
-  )
+  ) : null
 }
 
 export default EditProfileDetail
-
