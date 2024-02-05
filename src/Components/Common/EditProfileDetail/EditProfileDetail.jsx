@@ -1,33 +1,31 @@
-import React, { useState } from 'react'
-import cutIcon from '../../../assets/cutIcon.svg'
+import React from 'react'
 
-function EditProfileDetail({ heading, link, oldValue, isShow}) {
-  let [isVisible, setIsVisible] = useState(isShow)
-  console.log(isVisible)
-  console.log(oldValue)
-
-  const handleClose = () => {
-    console.log(isVisible)
-    setIsVisible(false)
-  }
-
-  return isVisible ? (
-    <div className="p-10 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-      <p>{heading}</p>
-      <form action={link} className="flex gap-5">
-        <input type="text" value={oldValue} />
-        <button
-          type="submit"
-          className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1 me-2 dark:focus:ring-yellow-900"
-        >
-          Update
-        </button>
-      </form>
-      <button type="button" onClick={handleClose}>
+function EditProfileDetail({
+  link,
+  oldValue,
+  heading,
+  isShow,
+  onClose,
+  onUpdate,
+}) {
+  return (
+    <div className={`update-profile ${isShow ? 'show' : 'hide'}`}>
+      <button className="close-btn" onClick={onClose}>
         Close
       </button>
+      <form onSubmit={onUpdate}>
+        <label>
+          New Value:
+          <input
+            type="text"
+            value={oldValue}
+            onChange={(e) => console.log(e.target.value)}
+          />
+        </label>
+        <button type="submit">Update</button>
+      </form>
     </div>
-  ) : null
+  )
 }
 
 export default EditProfileDetail

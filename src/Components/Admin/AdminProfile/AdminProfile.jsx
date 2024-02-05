@@ -16,15 +16,24 @@ function AdminProfile() {
     },
   ]
 
-//  const [form, setForm] = useState(null)
- const [editProfileDetail, setEditProfileDetail] = useState(null)
+  const [editProfileDetail, setEditProfileDetail] = useState(null)
 
- function displayEditForm(e) {
-   let oldValue = e.target.value
-   setEditProfileDetail(
-     <EditProfileDetail link={'./hello'} oldValue={oldValue} heading={'khan'} isShow={true}/>
-   )
- }
+  function displayEditForm(value) {
+    console.log(value)
+    setEditProfileDetail(
+      <EditProfileDetail
+        link="./hello"
+        oldValue={value}
+        heading={key}
+        isShow={true}
+        onClose={() => setEditProfileDetail(null)}
+        onUpdate={(e) => {
+          e.preventDefault()
+          setEditProfileDetail(null)
+        }}
+      />
+    )
+  }
 
   const adminDetails = adminDetailInput.map((admindetail) => {
     return (
@@ -37,28 +46,25 @@ function AdminProfile() {
           <h1 className="text-3xl">{admindetail.name}</h1>
           <table className="border-collapse w-full mt-4">
             <tbody>
-              {Object.entries(admindetail).map(([key, value]) => {
-                return (
-                  <tr key={key} className="p-2">
-                    <td className="p-1.5 font-bold">{key}</td>
-                    <td className="p-1.5">{value}</td>
-                    {key === 'address' ||
-                    key === 'email' ||
-                    key === 'phoneNumber' ? (
-                      <td>
-                        <button
-                          onClick={displayEditForm}
-                          type="button"
-                          value={value}
-                          className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1 me-2 dark:focus:ring-yellow-900"
-                        >
-                          Edit
-                        </button>
-                      </td>
-                    ) : null}
-                  </tr>
-                )
-              })}
+              {Object.entries(admindetail).map(([key, value]) => (
+                <tr key={key} className="p-2">
+                  <td className="p-1.5 font-bold">{key}</td>
+                  <td className="p-1.5">{value}</td>
+                  {key === 'address' ||
+                  key === 'email' ||
+                  key === 'phoneNumber' ? (
+                    <td>
+                      <button
+                        onClick={() => displayEditForm(value)}
+                        type="button"
+                        className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1 me-2 dark:focus:ring-yellow-900"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  ) : null}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
