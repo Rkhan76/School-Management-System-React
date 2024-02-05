@@ -14,6 +14,7 @@ function EditProfileDetail({
         Close
       </button>
       <form onSubmit={onUpdate}>
+        {/* Include your update form fields here */}
         <label>
           New Value:
           <input

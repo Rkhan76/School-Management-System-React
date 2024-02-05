@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import profileImage from '../../../assets/profileImage.png'
 import EditProfileDetail from '../../Common/EditProfileDetail/EditProfileDetail'
 
@@ -24,7 +24,7 @@ function AdminProfile() {
       <EditProfileDetail
         link="./hello"
         oldValue={value}
-        heading={key}
+        heading="khan"
         isShow={true}
         onClose={() => setEditProfileDetail(null)}
         onUpdate={(e) => {
