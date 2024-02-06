@@ -1,19 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './sideBarComponent.css'
 import forwardIcon from '../../../assets/forwardIcon.svg'
-import dashBoardIcon from '../../../assets/dashBoardIcon.svg'
 
-function SideBarComponent() {
+function SideBarComponent({ componentName, componentIcon, to }) {
+ console.log(to)
   return (
     <>
-      <div className="sideBarComponent">
-        <img className="h-6 w-6 mt-2" src={dashBoardIcon} alt="DashboardIcon" />
+      <Link to={to} className="sideBarComponent">
+        <img className="h-6 w-6 mt-2" src={componentIcon} alt="DashboardIcon" />
         <div className="mt-1 text-lg">
-          <p>Dashboard</p>
+          <p>{componentName}</p>
         </div>
         <img className="h-8 w-8 mt-1.5" src={forwardIcon} alt="forwardIcon" />
-      </div>
-      <hr style={{ borderColor: 'black', width:"250px" }} />
+      </Link>
+      <hr style={{ borderColor: 'black', width: '250px' }} />
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import DashboardPageComponents from '../../Common/dashboardPageComponents/DashboardPageComponents'
-import studentProfileIcon from '../../../assets/studentProfileIcon.svg'
+import profileIcon from '../../../assets/profileIcon.svg'
 import attedenceIcon from '../../../assets/attendenceIcon.svg'
 import resultIcon from '../../../assets/resultIcon.svg'
 import timeTableIcon from '../../../assets/timeTableIcon.svg'
@@ -16,7 +16,7 @@ import teacherReviews from '../../../assets/teacherReviews.svg'
 function TeacherDashboard() {
   return (
     <div className="dashboardContentContainer">
-      <DashboardPageComponents icon={studentProfileIcon} title="Profile" />
+      <DashboardPageComponents icon={profileIcon} title="Profile" />
       <DashboardPageComponents icon={teacherAttendence} title="Attendence" />
       <DashboardPageComponents icon={teacherSchedule} title="Time Table" />
       <DashboardPageComponents icon={studentDetails} title="Student Details" />
