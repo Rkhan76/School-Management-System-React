@@ -1,67 +1,113 @@
-import React, { useState } from 'react'
+
 
 function EditProfileDetail({
-  link,
-  oldValue,
-  heading,
-  isShow,
+  initialValue,
+  editableFields,
   onClose,
   onUpdate,
 }) {
-  const [newValue, setNewValue] = useState(oldValue)
+  // const [formData, setFormData] = useState({ ...initialValue })
+ let formData = { name: 'John Doe',
+      gender: 'Male',
+      fatherName: 'James Doe',
+      motherName: 'Mary Doe',
+      dateOfBirth: '2005-05-15',
+      religion: 'Christian',
+      fatherOccupation: 'Engineer',
+      email: 'john.doe@example.com',
+      admissionDate: '2023-09-01',
+      class: '10th',
+      section: 'A',
+      house: 'Blue',
+      rollNo: '101',
+      address: '123 Main Street, Cityville',
+      phoneNumber: '+1 123-456-7890',
+      intro:
+        'John is an enthusiastic student with a passion for science and technology.',
+    }
 
-  const handleInputChange = (e) => {
-    setNewValue(e.target.value)
-  }
+    formData = initialValue
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   })
+  // }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   onUpdate(formData)
+  // }
 
   return (
-    <div
-      className={`fixed inset-0 ${isShow ? 'block' : 'hidden'} overflow-y-auto`}
-    >
+    <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        {/* Background overlay */}
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
 
-        {/* Modal panel */}
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
         >
           &#8203;
         </span>
-        <div
-          className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-headline"
-        >
-          <div className="p-6">
-            <button
-              className="close-btn absolute top-4 right-4"
-              onClick={onClose}
-            >
-              Close
-            </button>
-            <form onSubmit={(e) => onUpdate(e, newValue)} className="mt-4">
-              {/* Include your update form fields here */}
-              <label>
-                New Value:
-                <input
-                  type="text"
-                  value={newValue}
-                  onChange={handleInputChange}
-                  className="border border-gray-300 p-2 mt-2 w-full"
-                />
-              </label>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white p-2 mt-4 rounded-md hover:bg-blue-600"
-              >
-                Update
-              </button>
-            </form>
+
+        <div className="fixed inset-0 flex items-center justify-center overflow-auto">
+          <div className="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <h3 className="text-lg leading-6 font-medium text-gray-900">
+                Edit Details
+              </h3>
+              <form>
+                {Object.entries(formData).map(([key, value]) => (
+                  <div key={key} className="mb-4">
+                    <label
+                      htmlFor={key}
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
+                      {key}:
+                    </label>
+                    {editableFields.includes(key) ? (
+                      <input
+                        type="text"
+                        id={key}
+                        name={key}
+                        value={value}
+                        onChange={handleChange}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                    ) : (
+                      <input
+                        type="text"
+                        id={key}
+                        name={key}
+                        value={value}
+                        readOnly
+                        className="bg-gray-100 shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+                      />
+                    )}
+                  </div>
+                ))}
+                <div className="flex justify-end">
+                  {/* <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                  >
+                    Update
+                  </button> */}
+                  <button
+                    type="button"
+
+                    className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
