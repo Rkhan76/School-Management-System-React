@@ -4,7 +4,6 @@ import './sideBarComponent.css'
 import forwardIcon from '../../../assets/forwardIcon.svg'
 
 function SideBarComponent({ componentName, componentIcon, to }) {
- console.log(to)
   return (
     <>
       <Link to={to} className="sideBarComponent">

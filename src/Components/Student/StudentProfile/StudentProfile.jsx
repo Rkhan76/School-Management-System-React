@@ -27,10 +27,10 @@ function StudentProfile() {
 
   const [editProfileDetail, setEditProfileDetail] = useState(null)
 
-  const displayEditForm = (studentData) => {
+  const displayEditForm = () => {
     setEditProfileDetail(
       <EditProfileDetail
-        initialValue={studentData}
+        initialValue={studentDetailInput}
         onClose={() => setEditProfileDetail(null)}
         onUpdate={(updatedData) => {
           // Handle update logic here
@@ -62,7 +62,7 @@ function StudentProfile() {
           </table>
         </div>
         <button
-          onClick={() => displayEditForm(studentDetail)}
+          onClick={() => displayEditForm()}
           className="bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 text-white font-bold py-2 px-4 rounded h-10 w-20"
         >
           Edit
