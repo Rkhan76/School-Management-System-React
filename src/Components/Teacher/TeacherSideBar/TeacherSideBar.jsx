@@ -17,14 +17,45 @@ function TeacherSideBar() {
   return (
     <div className="text-white" style={{ backgroundColor: '#052955' }}>
       <SideBarHeader />
-      <SideBarComponent componentName="Dashboard" componentIcon={dashBoardIcon} />
-      <SideBarComponent componentName="Profile" componentIcon={profileIcon} />
-      <SideBarComponent componentName="Attendence" componentIcon={attedenceIcon} />
-      <SideBarComponent componentName="Result" componentIcon={resultIcon} />
-      <SideBarComponent componentName="Time-Table" componentIcon={timeTableIcon} />
-      <SideBarComponent componentName="Assignment" componentIcon={assignmentIcon} />
-      <SideBarComponent componentName="Notice" componentIcon={noticeIcon} />
-      <SideBarComponent componentName="Feedback" componentIcon={feedbackIcon}
+      <SideBarComponent
+        componentName="Dashboard"
+        componentIcon={dashBoardIcon}
+        to="/teacher"
+      />
+      <SideBarComponent
+        componentName="Profile"
+        componentIcon={profileIcon}
+        to="/teacher/profile"
+      />
+      <SideBarComponent
+        componentName="Attendence"
+        componentIcon={attedenceIcon}
+        to="/teacher/attedence"
+      />
+      <SideBarComponent
+        componentName="Result"
+        componentIcon={resultIcon}
+        to="/teacher/result"
+      />
+      <SideBarComponent
+        componentName="Time-Table"
+        componentIcon={timeTableIcon}
+        to="/teacher/time-table"
+      />
+      <SideBarComponent
+        componentName="Assignment"
+        componentIcon={assignmentIcon}
+        to="/teacher/assignment"
+      />
+      <SideBarComponent
+        componentName="Notice"
+        componentIcon={noticeIcon}
+        to="/teacher/notice"
+      />
+      <SideBarComponent
+        componentName="Feedback"
+        componentIcon={feedbackIcon}
+        to="/teacher/feedback"
       />
     </div>
   )

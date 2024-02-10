@@ -25,6 +25,9 @@ function StudentProfile() {
     },
   ]
 
+  console.log(studentDetailInput[0])
+  let [studentdetail, setStudentdetails] = useState(studentDetailInput[0])
+
   const [editProfileDetail, setEditProfileDetail] = useState(null)
 
   const displayEditForm = () => {
@@ -34,6 +37,8 @@ function StudentProfile() {
         onClose={() => setEditProfileDetail(null)}
         onUpdate={(updatedData) => {
           // Handle update logic here
+
+
           console.log('Updated Data:', updatedData)
           setEditProfileDetail(null)
         }}

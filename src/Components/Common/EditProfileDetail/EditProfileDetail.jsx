@@ -2,6 +2,7 @@ import { useState } from 'react'
 import cutIcon from '../../../assets/cutIcon.svg'
 
 function EditProfileDetail({ initialValue, onClose, onUpdate }) {
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
@@ -34,8 +35,7 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
 
   return (
     <>
-      {/* Modal */}
-      {true && (
+      (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div
@@ -90,7 +90,7 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
             </div>
           </div>
         </div>
-      )}
+      )
     </>
   )
 }

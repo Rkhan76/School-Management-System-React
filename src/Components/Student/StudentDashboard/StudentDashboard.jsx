@@ -14,14 +14,45 @@ import passwordChangeIcon from '../../../assets/passwordChangeIcon.svg'
 function StudentDashboard() {
   return (
     <div className="dashboardContentContainer">
-      <DashboardPageComponents icon={profileIcon} title="Profile"/>
-      <DashboardPageComponents icon={attedenceIcon} title="Attendence" />
-      <DashboardPageComponents icon={resultIcon} title="Result" />
-      <DashboardPageComponents icon={timeTableIcon} title="Time Table" />
-      <DashboardPageComponents icon={assignmentIcon} title="Assignment" />
-      <DashboardPageComponents icon={noticeIcon} title="Notice" />
-      <DashboardPageComponents icon={feedbackIcon} title="Teacher Feedback" />
-      <DashboardPageComponents icon={passwordChangeIcon} title="Change Password"/>
+      <DashboardPageComponents
+        icon={profileIcon}
+        title="Profile"
+        to="/student/profile"
+      />
+      <DashboardPageComponents
+        icon={attedenceIcon}
+        title="Attendence"
+        to="/student/attendence"
+      />
+      <DashboardPageComponents
+        icon={resultIcon}
+        title="Result"
+        to="/student/result"
+      />
+      <DashboardPageComponents
+        icon={timeTableIcon}
+        title="Time Table"
+        to="/student/timetable"
+      />
+      <DashboardPageComponents
+        icon={assignmentIcon}
+        title="Assignment"
+        to="/student/assignment"
+      />
+      <DashboardPageComponents
+        icon={noticeIcon}
+        title="Notice"
+        to="/student/notice"
+      />
+      <DashboardPageComponents
+        icon={feedbackIcon}
+        title="Teacher Feedback"
+        to="/student/feedback"
+      />
+      <DashboardPageComponents
+        icon={passwordChangeIcon}
+        title="Change Password"
+      />
     </div>
   )
 }
