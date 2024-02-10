@@ -2,15 +2,35 @@ import { useState } from 'react'
 import cutIcon from '../../../assets/cutIcon.svg'
 
 function EditProfileDetail({ initialValue, onClose, onUpdate }) {
-  let [val,setVal] = useState()
- 
-   const handleChange = (event) => {
-    console.log(event.target)
-    console.log(val)
-     setVal(event.target.value)
-     console.log(val)
-   }
- 
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const data = {}
+    formData.forEach((value, key) => {
+      data[key] = value
+    })
+
+    try {
+      const response = await fetch(
+        'http://localhost:3000/update-studentprofile',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      )
+      if (!response.ok) {
+        throw new Error('Failed to submit form')
+      }
+      const responseData = await response.json()
+      console.log('Form submitted successfully:', responseData)
+      onUpdate(data)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    }
+  }
 
   return (
     <>
@@ -39,26 +59,27 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
                       onClick={onClose}
                     />
                   </div>
-                  <form method="patch" className="flex flex-wrap">
-                    {Object.entries(initialValue[0]).map(([key, value]) =>
-                     (
-                        <div key={key}>
-                          <label className="block font-bold ml-2">
-                            {key.toUpperCase()}
-                          </label>
-                          <input
-                            className="outline-1 border border-black p-2 m-2 rounded-sm"
-                            type="text"
-                            value={val}
-                            onChange={handleChange}
-                            readOnly={key === 'email' ? true : false} // Apply readOnly attribute only if the key is "email"
-                          />
-                        </div>
-                      )
-                    )}
-
+                  <form
+                    method="POST" // Change method to POST
+                    action="http://localhost:3000/update-studentprofile"
+                    className="flex flex-wrap"
+                    onSubmit={handleSubmit}
+                  >
+                    {Object.entries(initialValue[0]).map(([key, value]) => (
+                      <div key={key}>
+                        <label className="block font-bold ml-2">
+                          {key.toUpperCase()}
+                        </label>
+                        <input
+                          className="outline-1 border border-black p-2 m-2 rounded-sm"
+                          type="text"
+                          placeholder={value}
+                          name={key}
+                        />
+                      </div>
+                    ))}
                     <button
-                      onClick={onUpdate}
+                      type="submit"
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Edit Profile
