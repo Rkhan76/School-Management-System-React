@@ -16,19 +16,59 @@ import teacherReviews from '../../../assets/teacherReviews.svg'
 function TeacherDashboard() {
   return (
     <div className="dashboardContentContainer">
-      <DashboardPageComponents icon={profileIcon} title="Profile" />
-      <DashboardPageComponents icon={teacherAttendence} title="Attendence" />
-      <DashboardPageComponents icon={teacherSchedule} title="Time Table" />
-      <DashboardPageComponents icon={studentDetails} title="Student Details" />
-      <DashboardPageComponents icon={attedenceIcon} title="Student Attendence" />
-      <DashboardPageComponents icon={resultIcon} title="Student Result" />
-      <DashboardPageComponents icon={timeTableIcon} title="Students Time Table" />
-      <DashboardPageComponents icon={assignmentIcon} title="Assignment" />
-      <DashboardPageComponents icon={noticeIcon} title="Notice" />
-      <DashboardPageComponents icon={teacherReviews} title="Reviews" />
+      <DashboardPageComponents
+        icon={profileIcon}
+        title="Profile"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={teacherAttendence}
+        title="Attendence"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={teacherSchedule}
+        title="Time Table"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={studentDetails}
+        title="Student Details"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={attedenceIcon}
+        title="Student Attendence"
+      />
+      <DashboardPageComponents
+        icon={resultIcon}
+        title="Student Result"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={timeTableIcon}
+        title="Students Time Table"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={assignmentIcon}
+        title="Assignment"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={noticeIcon}
+        title="Notice"
+        to="/teacher/profile"
+      />
+      <DashboardPageComponents
+        icon={teacherReviews}
+        title="Reviews"
+        to="/teacher/profile"
+      />
       <DashboardPageComponents
         icon={passwordChangeIcon}
         title="Change Password"
+        to="/teacher/profile"
       />
     </div>
   )

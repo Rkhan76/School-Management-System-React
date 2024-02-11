@@ -24,7 +24,7 @@ import ParentsDashboard from './Components/Parents/ParentsDashboard/ParentsDashb
 import AdminHome from './Components/Admin/AdminHome/AdminHome.jsx'
 import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard.jsx'
 import ParentsProfile from './Components/Parents/ParentsProfile/ParentsProfile.jsx'
-import TeacherProfile from './Components/Teacher/TeacherProfile/TeacherProfile.jsx'
+import TeacherProfile, {teacherProfileInfoLoader} from './Components/Teacher/TeacherProfile/TeacherProfile.jsx'
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile.jsx'
 
 const router = createBrowserRouter(
@@ -42,6 +42,13 @@ const router = createBrowserRouter(
         </Route>
         <Route path="teacher" element={<TeacherHome />}>
           <Route path="" element={<TeacherDashboard />} />
+          <Route
+            loader={teacherProfileInfoLoader}
+            path="profile"
+            element={<TeacherProfile />}
+          />
+          <Route path="profile" element={<TeacherProfile />} />
+          <Route path="profile" element={<TeacherProfile />} />
           <Route path="profile" element={<TeacherProfile />} />
         </Route>
         <Route path="parents" element={<ParentsHome />}>

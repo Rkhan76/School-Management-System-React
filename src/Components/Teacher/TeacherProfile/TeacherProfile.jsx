@@ -1,8 +1,12 @@
 import {useState} from 'react'
+import {useLoaderData} from 'react-router-dom'
 import profileImage from '../../../assets/profileImage.png'
 import EditProfileDetail from '../../Common/EditProfileDetail/EditProfileDetail'
 
 function TeacherProfile() {
+  const profileData = useLoaderData()
+  console.log(profileData)
+  console.log(typeof profileData)
   const teacherDetailInput = [
     {
       teacherId: 'T001',
@@ -83,3 +87,8 @@ function TeacherProfile() {
 }
 
 export default TeacherProfile
+
+export const teacherProfileInfoLoader = async () => {
+  const response = await fetch('http://localhost:8000/teacher/profile')
+  return response.json()
+}
