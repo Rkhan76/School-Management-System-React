@@ -26,11 +26,15 @@ import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard.jsx
 import ParentsProfile from './Components/Parents/ParentsProfile/ParentsProfile.jsx'
 import TeacherProfile, {teacherProfileInfoLoader} from './Components/Teacher/TeacherProfile/TeacherProfile.jsx'
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile.jsx'
+import SignIn from './Components/SignIn/SignIn.jsx'
+import SignUp from './Components/SignUp/SignUp.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/">
+        <Route path='SignIn' element={<SignIn/>} />
+        <Route path='SignUp' element={<SignUp />}/>
         <Route path="student" element={<StudentHome />}>
           <Route path="" element={<StudentDashboard />} />
           <Route path="profile" element={<StudentProfile />} />

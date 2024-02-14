@@ -12,7 +12,7 @@ import timeTableIcon from '../../../assets/timeTableIcon.svg'
 import assignmentIcon from '../../../assets/assignmentIcon.svg'
 import noticeIcon from '../../../assets/noticeIcon.svg'
 import feedbackIcon from '../../../assets/feedbackIcon.svg'
-
+import studentDetails from '../../../assets/studentDetails.svg'
 function TeacherSideBar() {
   return (
     <div className="text-white" style={{ backgroundColor: '#052955' }}>
@@ -30,18 +30,28 @@ function TeacherSideBar() {
       <SideBarComponent
         componentName="Attendence"
         componentIcon={attedenceIcon}
-        to="/teacher/attedence"
-      />
-      <SideBarComponent
-        componentName="Result"
-        componentIcon={resultIcon}
-        to="/teacher/result"
+        to="/teacher/attendence"
       />
       <SideBarComponent
         componentName="Time-Table"
         componentIcon={timeTableIcon}
         to="/teacher/time-table"
       />
+      <SideBarComponent
+        icon={studentDetails}
+        title="Student Details"
+        to="/teacher/profile"
+      />
+      <SideBarComponent 
+      icon={attedenceIcon} 
+      title="Student Attendence"
+       />
+      <SideBarComponent
+        componentName="Result"
+        componentIcon={resultIcon}
+        to="/teacher/result"
+      />
+
       <SideBarComponent
         componentName="Assignment"
         componentIcon={assignmentIcon}
