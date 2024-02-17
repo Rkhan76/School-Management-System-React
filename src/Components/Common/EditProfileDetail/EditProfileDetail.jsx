@@ -13,7 +13,7 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/update-studentprofile',
+        'http://localhost:8000/student/profile',
         {
           method: 'POST',
           headers: {
@@ -82,7 +82,7 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
                       type="submit"
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
-                      Edit Profile
+                      Update
                     </button>
                   </form>
                 </div>

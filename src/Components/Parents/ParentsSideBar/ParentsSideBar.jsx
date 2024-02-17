@@ -3,6 +3,10 @@ import React from 'react'
 import SideBarHeader from '../../Common/sideBarHeader/SideBarHeader'
 import SideBarComponent from '../../Common/sideBarComponent/SideBarComponent'
 
+import dashBoardIcon from '../../../assets/dashBoardIcon.svg'
+import profileIcon from '../../../assets/profileIcon.svg'
+
+
 function ParentsSideBar() {
   return (
     <div className="text-white" style={{ backgroundColor: '#052955' }}>

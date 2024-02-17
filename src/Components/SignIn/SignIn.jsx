@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 function SignIn() {
   const navigate = useNavigate()
+  const [error, setError] = useState(null)
 
   const handleSignIn = async (e) => {
     e.preventDefault()
@@ -12,7 +13,7 @@ function SignIn() {
     formData.forEach((value, key) => {
       data[key] = value
     })
-    console.log(data)
+  
 
     try {
       const response = await fetch('http://localhost:8000/signin', {
@@ -24,13 +25,54 @@ function SignIn() {
       })
 
       if (response.ok) {
-        
-        console.log('Sign-in successful')
-        navigate('/student')
-        if(error) console.log(error)
-      } 
+        const responseData = await response.json()
+        console.log(responseData) // Check response data in console
+        const role = responseData.role
+        console.log('Sign-in successful. Role:',role)
+        handleCookie()
+        navigate(`/${role}`)
+      } else {
+        const errorData = await response.json()
+        setError(errorData.message)
+      }
     } catch (error) {
       console.error('Error occurred during sign-in:', error)
+      setError('An error occurred during sign-in. Please try again.')
+    }
+  }
+
+  function handleCookie(){
+    // Access JWT token from cookie
+    const token = document.cookie
+      .split(';')
+      .find((cookie) => cookie.trim().startsWith('jwt='))
+    if (token) {
+      const [, jwtToken] = token.split('=')
+      // Use the JWT token for navigation or authentication
+      console.log(jwtToken)
+
+      // Example navigation based on JWT content
+      const decodedToken = JSON.parse(atob(jwtToken.split('.')[1]))
+      if (decodedToken.role === 'admin') {
+        history.push('/admin-dashboard')
+      } else {
+        history.push('/user-dashboard')
+      }
+
+      // Send JWT token to backend for authentication (example)
+      fetch('https://example.com/api/authenticate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: jwtToken }),
+      })
+        .then((response) => {
+          // Handle response from backend
+        })
+        .catch((error) => {
+          // Handle error
+        })
     }
   }
 

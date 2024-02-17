@@ -3,6 +3,27 @@ import profileImage from '../../../assets/profileImage.png'
 import EditProfileDetail from '../../Common/EditProfileDetail/EditProfileDetail'
 
 function StudentProfile() {
+
+//  const [cookieValue, setCookieValue] = useState(null)
+
+//  // Function to get the value of a specific cookie
+//  const getCookieValue = (cookieName) => {
+//    const cookies = document.cookie.split(';')
+//    for (let cookie of cookies) {
+//      const [name, value] = cookie.split('=')
+//      if (name.trim() === cookieName) {
+//        return decodeURIComponent(value)
+//      }
+//    }
+//    return null
+//  }
+
+//  // Use useEffect to get the value of the cookie when the component mounts
+//  useEffect(() => {
+//    const myCookieValue = getCookieValue('myCookieName')
+//    setCookieValue(myCookieValue)
+//  }, []) 
+
   const studentDetailInput = [
     {
       name: 'John Doe',
@@ -25,8 +46,7 @@ function StudentProfile() {
     },
   ]
 
-  console.log(studentDetailInput[0])
-  let [studentdetail, setStudentdetails] = useState(studentDetailInput[0])
+
 
   const [editProfileDetail, setEditProfileDetail] = useState(null)
 
@@ -36,9 +56,6 @@ function StudentProfile() {
         initialValue={studentDetailInput}
         onClose={() => setEditProfileDetail(null)}
         onUpdate={(updatedData) => {
-          // Handle update logic here
-
-
           console.log('Updated Data:', updatedData)
           setEditProfileDetail(null)
         }}

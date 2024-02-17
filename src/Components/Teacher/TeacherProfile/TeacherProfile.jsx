@@ -23,17 +23,13 @@ function TeacherProfile() {
 
     const [editProfileDetail, setEditProfileDetail] = useState(null)
 
-    function displayEditForm(value) {
-      console.log(value)
+    function displayEditForm() {
       setEditProfileDetail(
         <EditProfileDetail
-          link="./hello"
-          oldValue={value}
-          heading="khan"
-          isShow={true}
+          initialValue={teacherDetailInput}
           onClose={() => setEditProfileDetail(null)}
-          onUpdate={(e) => {
-            e.preventDefault()
+          onUpdate={(updatedData) => {
+            console.log('Updated Data:', updatedData)
             setEditProfileDetail(null)
           }}
         />
@@ -56,24 +52,17 @@ function TeacherProfile() {
                  <tr key={key} className="p-2">
                    <td className="p-1.5 font-bold">{key}</td>
                    <td className="p-1.5">{value}</td>
-                   {key === 'address' ||
-                   key === 'email' ||
-                   key === 'phoneNumber' ? (
-                     <td>
-                       <button
-                         onClick={() => displayEditForm(value)}
-                         type="button"
-                         className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-3 py-1 me-2 dark:focus:ring-yellow-900"
-                       >
-                         Edit
-                       </button>
-                     </td>
-                   ) : null}
                  </tr>
                ))}
              </tbody>
            </table>
          </div>
+         <button
+           onClick={() => displayEditForm()}
+           className="bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 text-white font-bold py-2 px-4 rounded h-10 w-20"
+         >
+           Edit
+         </button>
        </div>
      )
    })
