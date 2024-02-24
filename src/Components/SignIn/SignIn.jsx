@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -28,9 +29,11 @@ function SignIn() {
         const responseData = await response.json()
         console.log(responseData) // Check response data in console
         const role = responseData.role
+        const email = responseData.email
+        const token = responseData.token
         console.log('Sign-in successful. Role:',role)
-        handleCookie()
-        navigate(`/${role}`)
+        Cookies.set('token', token, { expires: 7 })
+        navigate(`/${role}`, { state: { email } })
       } else {
         const errorData = await response.json()
         setError(errorData.message)
@@ -68,7 +71,8 @@ function SignIn() {
         body: JSON.stringify({ token: jwtToken }),
       })
         .then((response) => {
-          // Handle response from backend
+          console.log(response.json())
+
         })
         .catch((error) => {
           // Handle error
