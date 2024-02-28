@@ -1,7 +1,6 @@
-// import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {setCretendials} from "../../context/auth"
+import {setCretendials} from "../../Auth/auth"
 
 function SignIn() {
   const navigate = useNavigate()
@@ -28,11 +27,8 @@ function SignIn() {
 
       if (response.ok) {
         const responseData = await response.json()
-        console.log(responseData) // Check response data in console
-        const role = responseData.role
-        const email = responseData.email
-        const token = responseData.token
-        if(token && email) setCretendials(email, token)
+        const {role, email, token} = responseData
+        if(token && role && email) setCretendials(role, email, token)
         navigate(`/${role}`)
       } else {
         const errorData = await response.json()

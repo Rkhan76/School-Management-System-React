@@ -1,59 +1,19 @@
 import { useState } from 'react'
+import { useLoaderData } from 'react-router-dom'
+
 import profileImage from '../../../assets/profileImage.png'
 import EditProfileDetail from '../../Common/EditProfileDetail/EditProfileDetail'
 
 function StudentProfile() {
-
-//  const [cookieValue, setCookieValue] = useState(null)
-
-//  // Function to get the value of a specific cookie
-//  const getCookieValue = (cookieName) => {
-//    const cookies = document.cookie.split(';')
-//    for (let cookie of cookies) {
-//      const [name, value] = cookie.split('=')
-//      if (name.trim() === cookieName) {
-//        return decodeURIComponent(value)
-//      }
-//    }
-//    return null
-//  }
-
-//  // Use useEffect to get the value of the cookie when the component mounts
-//  useEffect(() => {
-//    const myCookieValue = getCookieValue('myCookieName')
-//    setCookieValue(myCookieValue)
-//  }, []) 
-
-  const studentDetailInput = [
-    {
-      name: 'John Doe',
-      gender: 'Male',
-      fatherName: 'James Doe',
-      motherName: 'Mary Doe',
-      dateOfBirth: '2005-05-15',
-      religion: 'Christian',
-      fatherOccupation: 'Engineer',
-      email: 'john.doe@example.com',
-      admissionDate: '2023-09-01',
-      class: '10th',
-      section: 'A',
-      house: 'Blue',
-      rollNo: '101',
-      address: '123 Main Street, Cityville',
-      phoneNumber: '+1 123-456-7890',
-      intro:
-        'John is an enthusiastic student with a passion for science and technology.',
-    },
-  ]
-
-
-
+  const studentProfileDetail = useLoaderData() // Accessing data from loader function
+  console.log(studentProfileDetail)
+ 
   const [editProfileDetail, setEditProfileDetail] = useState(null)
 
   const displayEditForm = () => {
     setEditProfileDetail(
       <EditProfileDetail
-        initialValue={studentDetailInput}
+        initialValue={studentProfileDetail}
         onClose={() => setEditProfileDetail(null)}
         onUpdate={(updatedData) => {
           console.log('Updated Data:', updatedData)
@@ -63,7 +23,7 @@ function StudentProfile() {
     )
   }
 
-  const studentDetails = studentDetailInput.map((studentDetail) => {
+  const studentDetails = studentProfileDetail.map((studentDetail) => {
     return (
       <div
         className="flex gap-10 p-10 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"

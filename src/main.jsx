@@ -24,20 +24,28 @@ import ParentsDashboard from './Components/Parents/ParentsDashboard/ParentsDashb
 import AdminHome from './Components/Admin/AdminHome/AdminHome.jsx'
 import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard.jsx'
 import ParentsProfile from './Components/Parents/ParentsProfile/ParentsProfile.jsx'
-import TeacherProfile, {teacherProfileInfoLoader} from './Components/Teacher/TeacherProfile/TeacherProfile.jsx'
+import TeacherProfile, {
+  teacherProfileInfoLoader,
+} from './Components/Teacher/TeacherProfile/TeacherProfile.jsx'
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile.jsx'
 import SignIn from './Components/SignIn/SignIn.jsx'
 import SignUp from './Components/SignUp/SignUp.jsx'
+import { studentProfileInfoLoader } from './fetching/fetch'
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/">
-        <Route path='SignIn' element={<SignIn/>} />
-        <Route path='SignUp' element={<SignUp />}/>
+        <Route path="SignIn" element={<SignIn />} />
+        <Route path="SignUp" element={<SignUp />} />
         <Route path="student" element={<StudentHome />}>
           <Route path="" element={<StudentDashboard />} />
-          <Route path="profile" element={<StudentProfile />} />
+          <Route
+            path="profile"
+            loader={studentProfileInfoLoader}
+            element={<StudentProfile />}
+          />
           <Route path="attendence" element={<StudentAttendance />} />
           <Route path="result" element={<StudentResult />} />
           <Route path="timetable" element={<StudentTimeTable />} />
@@ -68,9 +76,8 @@ const router = createBrowserRouter(
   )
 )
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>
 )
