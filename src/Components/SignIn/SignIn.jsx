@@ -1,6 +1,7 @@
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import {setCretendials} from "../../context/auth"
 
 function SignIn() {
   const navigate = useNavigate()
@@ -31,9 +32,8 @@ function SignIn() {
         const role = responseData.role
         const email = responseData.email
         const token = responseData.token
-        console.log('Sign-in successful. Role:',role)
-        Cookies.set('token', token, { expires: 7 })
-        navigate(`/${role}`, { state: { email } })
+        if(token && email) setCretendials(email, token)
+        navigate(`/${role}`)
       } else {
         const errorData = await response.json()
         setError(errorData.message)
@@ -44,41 +44,6 @@ function SignIn() {
     }
   }
 
-  function handleCookie(){
-    // Access JWT token from cookie
-    const token = document.cookie
-      .split(';')
-      .find((cookie) => cookie.trim().startsWith('jwt='))
-    if (token) {
-      const [, jwtToken] = token.split('=')
-      // Use the JWT token for navigation or authentication
-      console.log(jwtToken)
-
-      // Example navigation based on JWT content
-      const decodedToken = JSON.parse(atob(jwtToken.split('.')[1]))
-      if (decodedToken.role === 'admin') {
-        history.push('/admin-dashboard')
-      } else {
-        history.push('/user-dashboard')
-      }
-
-      // Send JWT token to backend for authentication (example)
-      fetch('https://example.com/api/authenticate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: jwtToken }),
-      })
-        .then((response) => {
-          console.log(response.json())
-
-        })
-        .catch((error) => {
-          // Handle error
-        })
-    }
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
