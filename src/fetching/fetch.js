@@ -16,5 +16,6 @@ export async function studentProfileInfoLoader(){
     'http://localhost:8000/profile/student',
     requestOptions
   )
+  console.log(response)
   return response.json()
 }
