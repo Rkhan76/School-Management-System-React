@@ -1,37 +1,32 @@
-import { useState } from 'react'
-import cutIcon from '../../../assets/cutIcon.svg'
+import cutIcon from "../../../assets/cutIcon.svg";
 
 function EditProfileDetail({ initialValue, onClose, onUpdate }) {
-
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    const formData = new FormData(event.target)
-    const data = {}
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {};
     formData.forEach((value, key) => {
-      data[key] = value
-    })
+      data[key] = value;
+    });
 
     try {
-      const response = await fetch(
-        'http://localhost:8000/student/profile',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        }
-      )
+      const response = await fetch("http://localhost:8000/profile/student", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       if (!response.ok) {
-        throw new Error('Failed to submit form')
+        throw new Error("Failed to submit form");
       }
-      const responseData = await response.json()
-      console.log('Form submitted successfully:', responseData)
-      onUpdate(data)
+      const responseData = await response.json();
+      console.log("Form submitted successfully:", responseData);
+      onUpdate(data);
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error("Error submitting form:", error);
     }
-  }
+  };
 
   return (
     <>
@@ -70,7 +65,7 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
                       <input
                         className="outline-1 border border-black p-2 m-2 rounded-sm"
                         type="text"
-                        placeholder={value}
+                        placeholder={value || ""} // Provide an empty string as a placeholder if value is null
                         name={key}
                       />
                     </div>
@@ -89,7 +84,7 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
       </div>
       )
     </>
-  )
+  );
 }
 
-export default EditProfileDetail
+export default EditProfileDetail;

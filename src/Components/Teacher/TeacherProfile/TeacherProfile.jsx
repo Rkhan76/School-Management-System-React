@@ -8,22 +8,6 @@ function TeacherProfile() {
 
    const teacherDetailInput = useLoaderData() // Accessing data from loader function
 
-  //  const [editProfileDetail, setEditProfileDetail] = useState(null)
-  
-  // const teacherDetailInput = [
-  //   {
-  //     teacherId: 'T001',
-  //     name: 'Ms. Smith',
-  //     gender: 'Female',
-  //     email: 'teacher1@example.com',
-  //     subject: 'Mathematics',
-  //     class: '10th',
-  //     section: 'A',
-  //     experience: '5 years',
-  //     phoneNumber: '+1 987-654-3210',
-  //   },
-  // ]
-
     const [editProfileDetail, setEditProfileDetail] = useState(null)
 
     function displayEditForm() {
