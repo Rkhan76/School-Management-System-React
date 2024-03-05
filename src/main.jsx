@@ -30,7 +30,7 @@ import TeacherProfile, {
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile.jsx'
 import SignIn from './Components/SignIn/SignIn.jsx'
 import SignUp from './Components/SignUp/SignUp.jsx'
-import { studentProfileInfoLoader } from './fetching/fetch'
+import { handleGetStudentProfile } from './fetching/fetch'
 
 
 const router = createBrowserRouter(
@@ -43,7 +43,7 @@ const router = createBrowserRouter(
           <Route path="" element={<StudentDashboard />} />
           <Route
             path="profile"
-            loader={studentProfileInfoLoader}
+            loader={handleGetStudentProfile}
             element={<StudentProfile />}
           />
           <Route path="attendence" element={<StudentAttendance />} />

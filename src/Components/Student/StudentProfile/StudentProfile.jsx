@@ -6,22 +6,34 @@ import EditProfileDetail from '../../Common/EditProfileDetail/EditProfileDetail'
 function StudentProfile() {
   const profileData = useLoaderData() // Accessing data from loader function
   const studentProfileDetail = profileData.profile
-  console.log(studentProfileDetail)
-  console.log(typeof studentProfileDetail)
   const [editProfileDetail, setEditProfileDetail] = useState(null)
+ 
 
-   const displayEditForm = () => {
-     setEditProfileDetail(
-       <EditProfileDetail
-         initialValue={studentProfileDetail}
-         onClose={() => setEditProfileDetail(null)}
-         onUpdate={(updatedData) => {
-           console.log('Updated Data:', updatedData)
-           setEditProfileDetail(null)
-         }}
-       />
-     )
-   }
+
+  const handleUpdateProfile = (updatedData) => {
+  // Update the state with the updated profile data
+  // setStudentProfileDetail(updatedData);
+};
+
+
+<EditProfileDetail
+  initialValue={studentProfileDetail}
+  onClose={() => setEditProfileDetail(null)}
+  onUpdate={handleUpdateProfile}
+/>
+
+  const displayEditForm = () => {
+    setEditProfileDetail(
+      <EditProfileDetail
+        initialValue={studentProfileDetail}
+        onClose={() => setEditProfileDetail(null)}
+        onUpdate={(updatedData) => {
+          console.log('Updated Data:', updatedData)
+          setEditProfileDetail(null)
+        }}
+      />
+    )
+  }
 
   return (
     <div className="p-10 flex justify-center box-border rounded-md">
@@ -32,9 +44,7 @@ function StudentProfile() {
         <img src={profileImage} className="h-36 w-36" alt="profileImage" />
         <div>
           <h1 className="text-3xl">
-            {studentProfileDetail.firstName +
-              ' ' +
-              studentProfileDetail.lastName}
+            {studentProfileDetail.firstName + ' ' + studentProfileDetail.lastName}
           </h1>
           <table className="border-collapse w-full mt-4">
             <tbody>
