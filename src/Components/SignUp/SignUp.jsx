@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function SignUp() {
 
@@ -31,28 +32,19 @@ function SignUp() {
 
    console.log('Form data:', data)
 
-   // Send the form data to the server
    try {
-     const response = await fetch('http://localhost:8000/signup', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json', // Set appropriate content type
-       },
-       body: JSON.stringify(data),
-     })
+    const response = await axios.post('http://localhost:8000/signup', data)
 
-     if (response.ok) {
+     if (response.status===201) {
        console.log('Signup successful')
-       // Handle successful signup
         navigate('/signin')
        
      } else {
        console.error('Signup failed')
-       // Handle failed signup
+       
      }
    } catch (error) {
      console.error('Error occurred during signup:', error)
-     // Handle error
    }
  }
 
