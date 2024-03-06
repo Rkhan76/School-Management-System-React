@@ -6,6 +6,8 @@ const { token, email } = Getcretendials()
 
 
 export async function handleGetStudentProfile() {
+  const { token, email } = Getcretendials()
+  console.log("here on handleGetStudentProfile :", email)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,21 +30,23 @@ export async function handleGetStudentProfile() {
 }
 
 export async function handleUpdateStudentProfile(studentUpdatedData) {
+
+  console.log(email)
+  console.log(studentUpdatedData)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
       Email: email,
     },
-    studentUpdatedData
+    
   }
 
   try {
     const response = await axios.post(
-      'http://localhost:8000/profile/student',
-      config
+      'http://localhost:8000/profile/student', studentUpdatedData, config
     )
-    console.log(response)
+
     return response
   } catch (error) {
     console.error('Error fetching student profile:', error)

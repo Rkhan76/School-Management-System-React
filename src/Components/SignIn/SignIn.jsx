@@ -28,6 +28,7 @@ function SignIn() {
       if (response.ok) {
         const responseData = await response.json()
         const {role, email, token} = responseData
+        console.log("here on sigin page :", email)
         if(token && role && email) setCretendials(role, email, token)
         navigate(`/${role}`)
       } else {

@@ -10,19 +10,21 @@ function EditProfileDetail({ initialValue, onClose, onUpdate }) {
   };
 
   const handleSubmit = async (event) => {
-    console.log(formData)
+    console.log(formData);
     event.preventDefault();
     try {
-      const response = handleUpdateStudentProfile(formData)
-      if (!(response.status === 201)) {
+      const response = await handleUpdateStudentProfile(formData);
+      console.log("Hello from editformdetail");
+      console.log(response);
+      if (response.status !== 201) {
         throw new Error('Failed to submit form');
       }
-      console.log('Form submitted successfully:', response.data);
       onUpdate(formData);
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
+  
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
