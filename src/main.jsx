@@ -31,6 +31,7 @@ import AdminProfile from './Components/Admin/AdminProfile/AdminProfile.jsx'
 import SignIn from './Components/SignIn/SignIn.jsx'
 import SignUp from './Components/SignUp/SignUp.jsx'
 import { handleGetStudentProfile } from './fetching/fetch'
+import StudentAttendancePost from './Components/Teacher/StudentAttendancePost.jsx'
 
 
 const router = createBrowserRouter(
@@ -62,6 +63,7 @@ const router = createBrowserRouter(
           <Route path="profile" element={<TeacherProfile />} />
           <Route path="profile" element={<TeacherProfile />} />
           <Route path="profile" element={<TeacherProfile />} />
+          <Route path="student-attendance" element={<StudentAttendancePost/>} />
         </Route>
         <Route path="parents" element={<ParentsHome />}>
           <Route path="" element={<ParentsDashboard />} />

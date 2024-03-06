@@ -25,7 +25,7 @@ export async function handleGetStudentProfile() {
     return response.data
   } catch (error) {
     console.error('Error fetching student profile:', error)
-    throw error // You can handle the error further if needed
+    throw error 
   }
 }
 
@@ -53,4 +53,13 @@ export async function handleUpdateStudentProfile(studentUpdatedData) {
     throw error 
   }
 }
+
+
+export async function handleGetClassData(selectedClass) {
+  try{
+    const classData = await axios("")
+  }
+}
+
+
 

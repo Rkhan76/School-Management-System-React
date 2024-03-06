@@ -45,7 +45,7 @@ function TeacherSideBar() {
       <SideBarComponent
         componentName="Student Attd"
         componentIcon={attedenceIcon}
-        to=""
+        to="/teacher/student-attendance"
       />
 
       <SideBarComponent
