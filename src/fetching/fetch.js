@@ -56,9 +56,23 @@ export async function handleUpdateStudentProfile(studentUpdatedData) {
 
 
 export async function handleGetClassData(selectedClass) {
-  try{
-    const classData = await axios("")
+  // console.log("selected class :", selectedClass)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email,
+      selectedClass
+    },
   }
+  try{
+    const response = await axios.get("http://localhost:8000/profile/class",config)
+    console.log(response.data.classData)
+    return response.data.classData
+  }catch(error){
+    console.log("error in fetching classData : ", error)
+  }
+ 
 }
 
 
