@@ -49,7 +49,8 @@ function StudentAttendancePost() {
     fetchData();
   }, [selectedClass]);
 
-  const displayViewAttendance = () => {
+  const displayViewAttendance = (params) => {
+    console.log(params)
     setSelectedStudent(
       <ModalContent
         status ={true}
