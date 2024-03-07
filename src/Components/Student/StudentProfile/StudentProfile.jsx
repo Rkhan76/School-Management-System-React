@@ -18,6 +18,7 @@ function StudentProfile() {
   const displayEditForm = () => {
     setEditProfileDetail(
       <EditProfileDetail
+        status = {true}
         initialValue={studentProfileDetail}
         onClose={() => setEditProfileDetail(null)}
         onUpdate={handleUpdateProfile}

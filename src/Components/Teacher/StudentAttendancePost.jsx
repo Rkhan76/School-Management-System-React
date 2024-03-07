@@ -3,12 +3,22 @@ import { useState, useEffect } from 'react';
 import { handleGetClassData } from "../../fetching/fetch"
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-
+import viewIcon from "../../assets/viewIcon.png"
+import editIcon from "../../assets/editIcon.png"
+import ModalContent from '../Common/ModalContent'; // Import your ModalContent component
 
 function StudentAttendancePost() {
   const [students, setStudents] = useState([]);
   const [selectedClass, setSelectedClass] = useState('');
+  const [selectedStudent, setSelectedStudent] = useState(null); // State to hold selected student data
 
+
+  const show = {
+    name: "rakhshan",
+    age: 25,
+    gender: "male",
+    occupation: "developer"
+};
   const classArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
   const studentClasses = classArray.map((studentClass) => (
@@ -38,9 +48,17 @@ function StudentAttendancePost() {
     };
     fetchData();
   }, [selectedClass]);
-  
 
-  console.log("student data :",students)
+  const displayViewAttendance = () => {
+    setSelectedStudent(
+      <ModalContent
+        status ={true}
+        initialValue={show}
+        onClose={() => setSelectedStudent(null)}
+        
+      />
+    );
+  };
 
   const columns = [
     { field: 'studentId', headerName: 'Student ID', width: 90 },
@@ -56,37 +74,24 @@ function StudentAttendancePost() {
       width: 150,
       editable: true,
     },
-    // {
-    //   field: 'age',
-    //   headerName: 'Age',
-    //   type: 'number',
-    //   width: 110,
-    //   editable: true,
-    // },
     {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      field: 'rollNo',
+      headerName: 'Roll No',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'attendanceStatus',
+      headerName: 'Attendance Status',
+      width: 150,
+      renderCell: (params) => (
+        <>
+          <img src={viewIcon} onClick={() => displayViewAttendance(params.row)} alt="view Icon" style={{ width: 24, height: 24, cursor: 'pointer' }} />
+          <img src={editIcon} alt="Edit Icon" style={{ width: 24, height: 24, cursor: 'pointer' }} />
+        </>
+      )
     },
   ];
-
-  // const rows = [
-  //   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-  //   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-  //   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-  //   { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-  //   { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  //   { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  //   { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  //   { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  //   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  // ];
-
-  
 
   return (
     <div>
@@ -109,13 +114,13 @@ function StudentAttendancePost() {
       <Box sx={{ height: 400, width: '100%' }}>
         <DataGrid
           rows={students}
-          columns={columns} // Define your columns here
+          columns={columns} 
           pageSize={5}
           checkboxSelection
           disableRowSelectionOnClick
         />
       </Box>
-
+      {selectedStudent}
     </div>
   );
 }
