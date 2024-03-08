@@ -53,6 +53,7 @@ function StudentAttendancePost() {
     console.log(params)
     setSelectedStudent(
       <ModalContent
+        studentDetail
         status ={true}
         initialValue={show}
         onClose={() => setSelectedStudent(null)}
@@ -100,7 +101,7 @@ function StudentAttendancePost() {
         <h1 className="p-5 text-3xl">Student Attendance</h1>
         <div className="p-4">
           <label className="p-4 text-lg" htmlFor="Session">
-            Select Session
+            Select Class
           </label>
           <select
             className="p-2 w-60 rounded-sm outline-none"

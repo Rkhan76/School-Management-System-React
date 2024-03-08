@@ -75,5 +75,29 @@ export async function handleGetClassData(selectedClass) {
  
 }
 
+export async function handleGetStudentAttendance(selectedSession){
+  // selectedSession = parseInt(selectedSession)
+  // const { token, email } = Getcretendials()
+
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //     'Content-Type': 'application/json',
+  //     Email: email,
+  //     selectedSession
+  //   },
+  // }
+  // try{
+  //   const response = await axios.get("http://localhost:8000/attendance/student",config)
+  //   console.log(response.data)
+  //   return response.data
+  // }catch(error){
+  //   console.log("error in fetching classData : ", error)
+  // }
+
+  console.log('i got the session on fetch file')
+
+}
+
 
 

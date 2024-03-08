@@ -19,9 +19,14 @@ const style = {
 const ModalContent = ({ status, initialValue, onClose }) => {
   const [open, setOpen] = React.useState(status);
 
+  React.useEffect(()=>{
+    
+  }
+  )
+
   const handleClose = () => {
     setOpen(false);
-    onClose(); // Call onClose from props to handle closing
+    onClose(); 
   };
 
   return (

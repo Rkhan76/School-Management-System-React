@@ -1,14 +1,41 @@
-import React from 'react'
+import { useState, useEffect} from 'react'
 import './StudentAttendence.css'
+import { handleGetStudentAttendance } from '../../../fetching/fetch'
 
 function StudentAttendance() {
+  const [selectedSession, setSelectedSession] = useState(null)
+
+  const sessionArray = [2000,2001,2001,2024]
+
+
+  const sessions = sessionArray.map((session) => (
+    <option value={session} key={session}>{session}</option>
+  ));
   
 
-  const sessionArray = [2000,2001,2001]
+  const handleSessionSelect = async (e) => {
+    const selectedSession = e.target.value;
+    setSelectedSession(selectedSession);
+  }
 
-  const sessions = sessionArray.map((session)=>{
-     return <option value={session}>{session}</option>
-  })
+  useEffect(() => {
+    const fetchData = async () => {
+      if (selectedSession) {
+        try {
+          const response = await handleGetStudentAttendance(selectedClass);
+          // const classData = response.map((student, index) => ({
+          //   ...student,
+          //   id: index + 1 // Add 1 to avoid zero-based indexing
+          // }));
+          // setStudents(classData);
+          // console.log("classData obtained:", classData); // Access classData here
+        } catch (error) {
+          console.error("Error fetching class data:", error);
+        }
+      }
+    };
+    fetchData();
+  }, [selectedSession]);
 
   const Attendence = [
     {
@@ -118,7 +145,9 @@ function StudentAttendance() {
           <label className="p-4 text-lg" htmlFor="Session">
             Select Session
           </label>
-          <select className="p-2 w-60 rounded-sm outline-none">
+          <select 
+           onChange={handleSessionSelect}
+          className="p-2 w-60 rounded-sm outline-none">
             {sessions}
           </select>
         </div>
