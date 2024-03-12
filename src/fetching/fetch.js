@@ -75,29 +75,36 @@ export async function handleGetClassData(selectedClass) {
  
 }
 
-export async function handleGetStudentAttendance(selectedSession){
-  // selectedSession = parseInt(selectedSession)
-  // const { token, email } = Getcretendials()
+export async function handleGetStudentAttendance(selectedSession) {
+  console.log(
+    'i am on fetch file on handleAttendance function',
+    selectedSession
+  )
+  selectedSession = parseInt(selectedSession)
+  const { token, email } = Getcretendials()
 
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //     'Content-Type': 'application/json',
-  //     Email: email,
-  //     selectedSession
-  //   },
-  // }
-  // try{
-  //   const response = await axios.get("http://localhost:8000/attendance/student",config)
-  //   console.log(response.data)
-  //   return response.data
-  // }catch(error){
-  //   console.log("error in fetching classData : ", error)
-  // }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email,
+      year: selectedSession,
+    }
+  }
 
-  console.log('i got the session on fetch file')
-
+  console.log(selectedSession)
+  try {
+    const response = await axios.get(
+      'http://localhost:8000/attendance/student',
+      config
+    )
+    
+    return response.data.attendance[0].attendance
+  } catch (error) {
+    console.log('error in fetching student Attendance : ', error)
+  }
 }
+
 
 
 
