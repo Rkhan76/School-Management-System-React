@@ -8,7 +8,8 @@ import Box from '@mui/material/Box'
 import { DataGrid } from '@mui/x-data-grid'
 import viewIcon from '../../assets/viewIcon.png'
 import editIcon from '../../assets/editIcon.png'
-import ModalContent from '../Common/ModalContent' // Import your ModalContent component
+import ViewStudentAttendanceModal from '../Common/ViewStudentAttendanceModal'
+import PostStudentAttendanceModal from '../Common/PostStudentAttendanceModal'
 
 function StudentAttendancePost() {
   const [students, setStudents] = useState([])
@@ -53,7 +54,7 @@ const displayViewAttendance = (params) => {
   console.log('Params :', params)
   handleGetStudentAttendance(null, params.email)
     .then((studentAttendanceData) => {
-      
+
       const studentDetail = {
         name: params.firstName + ' ' + params.lastName,
         studentClass: 7,
@@ -61,8 +62,7 @@ const displayViewAttendance = (params) => {
       }
 
       setSelectedStudent(
-        <ModalContent
-          studentDetail={studentDetail}
+        <ViewStudentAttendanceModal
           status={true}
           initialValue={studentDetail}
           onClose={() => setSelectedStudent(null)}
@@ -72,6 +72,22 @@ const displayViewAttendance = (params) => {
     .catch((error) => {
       console.log('getting error in fetching student attendance detail', error)
     })
+}
+
+const editAttendance = (params) => {
+  console.log("clicked on editIcon")
+  const studentDetail = {
+    name: params.firstName + ' ' + params.lastName,
+    studentClass: 7,
+  }
+      setSelectedStudent(
+        <PostStudentAttendanceModal
+          status={true}
+          initialValue={studentDetail}
+          onClose={() => setSelectedStudent(null)}
+        />
+      )
+
 }
 
 
@@ -115,6 +131,7 @@ const displayViewAttendance = (params) => {
           />
           <img
             src={editIcon}
+            onClick={() => editAttendance(params.row)}
             alt="Edit Icon"
             style={{ width: 24, height: 24, cursor: 'pointer' }}
           />

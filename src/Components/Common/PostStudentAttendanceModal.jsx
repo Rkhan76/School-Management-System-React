@@ -4,11 +4,10 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 
-
-const ModalContent = ({ status, initialValue, onClose }) => {
+const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
   const [open, setOpen] = React.useState(status)
   console.log('on modal content page :', initialValue)
-  const { name, studentAttendance } = initialValue
+  const { name } = initialValue
   const months = [
     'Jan',
     'Feb',
@@ -33,33 +32,33 @@ const ModalContent = ({ status, initialValue, onClose }) => {
     <th key={index + 1}>{index + 1}</th>
   ))
 
-  const monthAttendance = studentAttendance
-    ? Object.entries(studentAttendance).map(([month, monthAttendance]) => {
-        let presentCount = 0
-        let absentCount = 0
+  //   const monthAttendance = studentAttendance
+  //     ? Object.entries(studentAttendance).map(([month, monthAttendance]) => {
+  //         let presentCount = 0
+  //         let absentCount = 0
 
-        const days = monthAttendance.map((day, index) => {
-          if (day === true) {
-            presentCount++
-            return <td key={index}>P</td>
-          } else if (day === false) {
-            absentCount++
-            return <td key={index}>A</td>
-          } else {
-            return <td>-</td>
-          }
-        })
+  //         const days = monthAttendance.map((day, index) => {
+  //           if (day === true) {
+  //             presentCount++
+  //             return <td key={index}>P</td>
+  //           } else if (day === false) {
+  //             absentCount++
+  //             return <td key={index}>A</td>
+  //           } else {
+  //             return <td>-</td>
+  //           }
+  //         })
 
-        return (
-          <tr key={month}>
-            <td>{months[month - 1]}</td>
-            {days}
-            <td>{presentCount}</td>
-            <td>{absentCount}</td>
-          </tr>
-        )
-      })
-    : null
+  //         return (
+  //           <tr key={month}>
+  //             <td>{months[month - 1]}</td>
+  //             {days}
+  //             <td>{presentCount}</td>
+  //             <td>{absentCount}</td>
+  //           </tr>
+  //         )
+  //       })
+  //     : null
 
   return (
     <div>
@@ -81,7 +80,7 @@ const ModalContent = ({ status, initialValue, onClose }) => {
                 <th>Total Absent</th>
               </tr>
             </thead>
-            <tbody>{monthAttendance}</tbody>
+            {/* <tbody>{monthAttendance}</tbody> */}
           </table>
 
           <Button onClick={handleClose}>Close</Button>
@@ -91,4 +90,4 @@ const ModalContent = ({ status, initialValue, onClose }) => {
   )
 }
 
-export default ModalContent
+export default PostStudentAttendanceModal
