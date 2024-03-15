@@ -1,33 +1,65 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Modal from '@mui/material/Modal'
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 const ModalContent = ({ status, initialValue, onClose }) => {
-  const [open, setOpen] = React.useState(status);
-
-  React.useEffect(()=>{
-    
-  }
-  )
+  const [open, setOpen] = React.useState(status)
+  console.log('on modal content page :', initialValue)
+  const { name, studentAttendance } = initialValue
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
 
   const handleClose = () => {
-    setOpen(false);
-    onClose(); 
-  };
+    setOpen(false)
+    onClose()
+  }
+
+  const date = Array.from({ length: 31 }, (_, index) => (
+    <th key={index + 1}>{index + 1}</th>
+  ))
+
+  const monthAttendance = studentAttendance
+    ? Object.entries(studentAttendance).map(([month, monthAttendance]) => {
+        let presentCount = 0
+        let absentCount = 0
+
+        const days = monthAttendance.map((day, index) => {
+          if (day === true) {
+            presentCount++
+            return <td key={index}>P</td>
+          } else if (day === false) {
+            absentCount++
+            return <td key={index}>A</td>
+          } else {
+            return <td>-</td>
+          }
+        })
+
+        return (
+          <tr key={month}>
+            <td>{months[month - 1]}</td>
+            {days}
+            <td>{presentCount}</td>
+            <td>{absentCount}</td>
+          </tr>
+        )
+      })
+    : null
 
   return (
     <div>
@@ -36,18 +68,27 @@ const ModalContent = ({ status, initialValue, onClose }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-black shadow-md p-4 inline-block min-w-min max-w-full">
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {initialValue.name}
+            {name}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <table className="attendance-table m-10">
+            <thead>
+              <tr>
+                <th>Month</th>
+                {date}
+                <th>Total Present</th>
+                <th>Total Absent</th>
+              </tr>
+            </thead>
+            <tbody>{monthAttendance}</tbody>
+          </table>
+
           <Button onClick={handleClose}>Close</Button>
         </Box>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default ModalContent;
+export default ModalContent

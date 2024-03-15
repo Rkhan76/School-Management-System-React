@@ -75,13 +75,19 @@ export async function handleGetClassData(selectedClass) {
  
 }
 
-export async function handleGetStudentAttendance(selectedSession) {
-  console.log(
-    'i am on fetch file on handleAttendance function',
-    selectedSession
-  )
-  selectedSession = parseInt(selectedSession)
+export async function handleGetStudentAttendance(selectedSession, studentEmail) {
+  console.log('checking selectedSession', selectedSession)
   const { token, email } = Getcretendials()
+
+  // If selectedSession is falsy (null or undefined), set it to the current year
+  if (!selectedSession) {
+    selectedSession = new Date().getFullYear() // Use new Date().getFullYear() instead of Date.now().getFullYear()
+    console.log('session not selected : ', selectedSession)
+  }
+
+  if (!studentEmail) {
+    studentEmail = email
+  }
 
   const config = {
     headers: {
@@ -89,21 +95,25 @@ export async function handleGetStudentAttendance(selectedSession) {
       'Content-Type': 'application/json',
       Email: email,
       year: selectedSession,
-    }
+      studentEmail: studentEmail,
+    },
   }
 
-  console.log(selectedSession)
+
+
   try {
     const response = await axios.get(
       'http://localhost:8000/attendance/student',
       config
     )
-    
+
+    console.log("On fetch page :",response.data.attendance[0].attendance)
     return response.data.attendance[0].attendance
   } catch (error) {
     console.log('error in fetching student Attendance : ', error)
   }
 }
+
 
 
 
