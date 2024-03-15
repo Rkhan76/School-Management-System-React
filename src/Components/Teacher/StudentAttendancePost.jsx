@@ -75,10 +75,12 @@ const displayViewAttendance = (params) => {
 }
 
 const editAttendance = (params) => {
-  console.log("clicked on editIcon")
+  console.log("clicked on editIcon", params)
   const studentDetail = {
     name: params.firstName + ' ' + params.lastName,
-    studentClass: 7,
+    className: params.studentClass,
+    email: params.email,
+    year: new Date().getFullYear(),
   }
       setSelectedStudent(
         <PostStudentAttendanceModal

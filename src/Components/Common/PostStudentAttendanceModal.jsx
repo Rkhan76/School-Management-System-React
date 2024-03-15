@@ -1,13 +1,15 @@
-import * as React from 'react'
+import {useState} from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 
 const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
-  const [open, setOpen] = React.useState(status)
+  const [open, setOpen] = useState(status)
+  const [attnd,setAttnd] = useState()
   console.log('on modal content page :', initialValue)
-  const { name } = initialValue
+
+  const { name, email, className } = initialValue
   const months = [
     'Jan',
     'Feb',
@@ -28,37 +30,37 @@ const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
     onClose()
   }
 
+ const handleSubmit = (e) => {
+   e.preventDefault()
+   console.log('Form submitted')
+   console.log('Attendance data:', attnd) // Log the attendance data
+ }
+
+
   const date = Array.from({ length: 31 }, (_, index) => (
     <th key={index + 1}>{index + 1}</th>
   ))
 
-  //   const monthAttendance = studentAttendance
-  //     ? Object.entries(studentAttendance).map(([month, monthAttendance]) => {
-  //         let presentCount = 0
-  //         let absentCount = 0
+ const attd = months.map((month, index)=>{
+    const days = Array.from({ length: 31 }, (_, index) => (
+      <td key={index + 1} ><input type='checkbox'/></td>
+    ))
+    return (
+            <tr key={month}>
+              <td>{months[index]}</td>
+              {days}
+              {/* <td>{presentCount}</td>
+              <td>{absentCount}</td> */}
+            </tr>
+          )
+ })
 
-  //         const days = monthAttendance.map((day, index) => {
-  //           if (day === true) {
-  //             presentCount++
-  //             return <td key={index}>P</td>
-  //           } else if (day === false) {
-  //             absentCount++
-  //             return <td key={index}>A</td>
-  //           } else {
-  //             return <td>-</td>
-  //           }
-  //         })
 
-  //         return (
-  //           <tr key={month}>
-  //             <td>{months[month - 1]}</td>
-  //             {days}
-  //             <td>{presentCount}</td>
-  //             <td>{absentCount}</td>
-  //           </tr>
-  //         )
-  //       })
-  //     : null
+
+ 
+
+ 
+
 
   return (
     <div>
@@ -71,17 +73,28 @@ const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {name}
           </Typography>
-          <table className="attendance-table m-10">
-            <thead>
-              <tr>
-                <th>Month</th>
-                {date}
-                <th>Total Present</th>
-                <th>Total Absent</th>
-              </tr>
-            </thead>
-            {/* <tbody>{monthAttendance}</tbody> */}
-          </table>
+
+          <Button>Update</Button>
+
+          <form className="flex flex-wrap" onSubmit={handleSubmit}>
+            <table className="attendance-table m-10">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  {date}
+                  <th>Total Present</th>
+                  <th>Total Absent</th>
+                </tr>
+              </thead>
+              <tbody>{attd}</tbody>
+            </table>
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Update
+            </button>
+          </form>
 
           <Button onClick={handleClose}>Close</Button>
         </Box>
