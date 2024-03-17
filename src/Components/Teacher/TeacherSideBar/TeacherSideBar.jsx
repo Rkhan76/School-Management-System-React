@@ -51,7 +51,7 @@ function TeacherSideBar() {
       <SideBarComponent
         componentName="Result"
         componentIcon={resultIcon}
-        to="/teacher/result"
+        to="/teacher/student-result"
       />
 
       <SideBarComponent

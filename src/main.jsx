@@ -16,9 +16,11 @@ import StudentResult from './Components/Student/StudentResult/StudentResult.jsx'
 import StudentTimeTable from './Components/Student/StudentTimeTable/StudentTimeTable.jsx'
 import StudentAssignment from './Components/Student/StudentAssignment/StudentAssignment.jsx'
 import Notice from './Components/Student/Notice/Notice.jsx'
+
 import TeacherHome from './Components/Teacher/TeacherHome/TeacherHome.jsx'
 import TeacherSideBar from './Components/Teacher/TeacherSideBar/TeacherSideBar.jsx'
 import TeacherDashboard from './Components/Teacher/TeacherDashboard/TeacherDashboard.jsx'
+import StudentResultPost from './Components/Teacher/StudentResultPost.jsx'
 import ParentsHome from './Components/Parents/ParentsHome/ParentsHome.jsx'
 import ParentsDashboard from './Components/Parents/ParentsDashboard/ParentsDashboard.jsx'
 import AdminHome from './Components/Admin/AdminHome/AdminHome.jsx'
@@ -63,7 +65,11 @@ const router = createBrowserRouter(
           <Route path="profile" element={<TeacherProfile />} />
           <Route path="profile" element={<TeacherProfile />} />
           <Route path="profile" element={<TeacherProfile />} />
-          <Route path="student-attendance" element={<StudentAttendancePost/>} />
+          <Route
+            path="student-attendance"
+            element={<StudentAttendancePost />}
+          />
+          <Route path="student-result" element={<StudentResultPost />} />
         </Route>
         <Route path="parents" element={<ParentsHome />}>
           <Route path="" element={<ParentsDashboard />} />
