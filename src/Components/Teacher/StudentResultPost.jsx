@@ -11,7 +11,7 @@ import viewIcon from '../../assets/viewIcon.png'
 import editIcon from '../../assets/editIcon.png'
 import ViewStudentResultModal from '../Common/ViewStudentResultModal'
 // import ViewStudentAttendanceModal from '../Common/ViewStudentAttendanceModal'
-import PostStudentAttendanceModal from '../Common/PostStudentAttendanceModal'
+import PostStudentResultModal from '../Common/PostStudentResultModal'
 
 function StudentResultPost() {
   const [students, setStudents] = useState([])
@@ -85,7 +85,7 @@ const editAttendance = (params) => {
     year: new Date().getFullYear(),
   }
       setSelectedStudent(
-        <PostStudentAttendanceModal
+        <PostStudentResultModal
           status={true}
           initialValue={studentDetail}
           onClose={() => setSelectedStudent(null)}
@@ -147,7 +147,7 @@ const editAttendance = (params) => {
   return (
     <div>
       <div className="m-10 bg-gray-400 rounded-md">
-        <h1 className="p-5 text-3xl">Student Attendance</h1>
+        <h1 className="p-5 text-3xl">Student Result</h1>
         <div className="p-4">
           <label className="p-4 text-lg" htmlFor="Session">
             Select Class

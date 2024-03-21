@@ -196,6 +196,52 @@ export async function handleGetStudentResult(
   }
 }
 
+export async function handlePostStudentResult(
+  selectedSession,
+  studentEmail,
+  studentClass,
+  studentResultForm
+) {
+  console.log(studentResultForm)
+  const { result } = studentResultForm
+  const { token, email } = Getcretendials()
+
+  if (!selectedSession) {
+    selectedSession = new Date().getFullYear()
+  }
+
+  if (!studentEmail) {
+    studentEmail = email
+  }
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const data = {
+    email: studentEmail,
+    studentClass,
+    result,
+    year: selectedSession,
+  }
+
+  try {
+    const response = await axios.post(
+      'http://localhost:8000/result',
+      data,
+      config
+    )
+    console.log(response)
+    return response
+  } catch (error) {
+    console.log('Error submitting form data:', error)
+    throw error
+  }
+}
+
 
 
 
