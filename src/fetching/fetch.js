@@ -242,6 +242,42 @@ export async function handlePostStudentResult(
   }
 }
 
+export async function handleAssignmentPost(
+  assignmentForm
+) {
+ 
+  const { token, email } = Getcretendials()
+  const selectedSession = new Date().getFullYear()
+  const teacherEmail = email
+
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const data = {
+    ...assignmentForm,
+    teacherEmail,
+    year: selectedSession
+  }
+
+  try {
+    const response = await axios.post(
+      'http://localhost:8000/assignment',
+      data,
+      config
+    )
+    console.log(response.data)
+    return response.data.message
+  } catch (error) {
+    console.log('Error submitting form data:', error)
+    throw error
+  }
+}
+
 
 
 

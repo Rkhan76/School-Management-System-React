@@ -53,7 +53,7 @@ function TeacherDashboard() {
       <DashboardPageComponents
         icon={assignmentIcon}
         title="Assignment"
-        to="/teacher/profile"
+        to="/teacher/assignment"
       />
       <DashboardPageComponents
         icon={noticeIcon}

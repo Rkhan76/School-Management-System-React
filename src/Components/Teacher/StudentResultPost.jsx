@@ -1,10 +1,5 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import {
-  handleGetClassData,
-  handleGetStudentAttendance,
-  handleGetStudentResult,
-} from '../../fetching/fetch'
 import Box from '@mui/material/Box'
 import { DataGrid } from '@mui/x-data-grid'
 import viewIcon from '../../assets/viewIcon.png'
@@ -12,6 +7,11 @@ import editIcon from '../../assets/editIcon.png'
 import ViewStudentResultModal from '../Common/ViewStudentResultModal'
 // import ViewStudentAttendanceModal from '../Common/ViewStudentAttendanceModal'
 import PostStudentResultModal from '../Common/PostStudentResultModal'
+import {
+  handleGetClassData,
+  handleGetStudentAttendance,
+  handleGetStudentResult,
+} from '../../fetching/fetch'
 
 function StudentResultPost() {
   const [students, setStudents] = useState([])
