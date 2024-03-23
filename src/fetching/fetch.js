@@ -278,6 +278,36 @@ export async function handleAssignmentPost(
   }
 }
 
+export async function handleGetAssignment(selectedSession) {
+  console.log('checking selectedSession', selectedSession)
+  const { token, email } = Getcretendials()
+
+  // If selectedSession is falsy (null or undefined), set it to the current year
+  if (!selectedSession) {
+    selectedSession = new Date().getFullYear() // Use new Date().getFullYear() instead of Date.now().getFullYear()
+    console.log('session not selected : ', selectedSession)
+  }
+
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email,
+      year: selectedSession,
+    },
+  }
+
+  try {
+    const response = await axios.get('http://localhost:8000/assignment', config)
+
+    console.log('On fetch page :', response.data.assignments)
+    return response.data.assignments
+  } catch (error) {
+    console.log('error in fetching student Attendance : ', error)
+  }
+}
+
 
 
 
