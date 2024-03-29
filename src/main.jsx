@@ -14,7 +14,7 @@ import StudentAttendance from './Components/Student/StudentAttendence/StudentAtt
 import StudentProfile from './Components/Student/StudentProfile/StudentProfile.jsx'
 import StudentResult from './Components/Student/StudentResult/StudentResult.jsx'
 import StudentTimeTable from './Components/Student/StudentTimeTable/StudentTimeTable.jsx'
-import StudentAssignment from './Components/Student/StudentAssignment/StudentAssignment.jsx'
+import StudentAssignment from './Components/Student/StudentAssignment.jsx'
 import Notice from './Components/Student/Notice/Notice.jsx'
 
 import TeacherHome from './Components/Teacher/TeacherHome/TeacherHome.jsx'

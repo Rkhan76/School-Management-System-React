@@ -278,7 +278,7 @@ export async function handleAssignmentPost(
   }
 }
 
-export async function handleGetAssignment(selectedSession) {
+export async function handleGetAssignment(selectedSession,) {
   console.log('checking selectedSession', selectedSession)
   const { token, email } = Getcretendials()
 
@@ -307,6 +307,39 @@ export async function handleGetAssignment(selectedSession) {
     console.log('error in fetching student Attendance : ', error)
   }
 }
+
+export async function handleGetAssignmentByStudent(className){
+  
+  const { token, email } = Getcretendials()
+  const year = new Date().getFullYear()
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    Email: email,
+    className,
+    year
+  },
+}
+
+  try{
+    const assignmentData = await axios.get('http://localhost:8000/assignment',config)
+    console.log('Assignment data is : ', assignmentData.data.assignmentsData)
+    return assignmentData.data.assignmentsData
+  }catch(error){
+    console.log('error in fetching assignment', error)
+  }
+  
+}
+
+
+export async function handlePostAssignmentByStudent(assignmentSubmissionForm){
+    const { token, email } = Getcretendials()
+    
+}
+
+
 
 
 
