@@ -116,40 +116,38 @@ export async function handleGetStudentAttendance(selectedSession, studentEmail) 
 
 
 export async function handlePostStudentAttendance(
-  selectedSession,
-  studentEmail
+  studentEmail,
+  className,
+  attendance
 ) {
-  console.log('checking selectedSession', selectedSession)
   const { token, email } = Getcretendials()
+  const selectedSession = new Date().getFullYear()
 
-  // If selectedSession is falsy (null or undefined), set it to the current year
-  if (!selectedSession) {
-    selectedSession = new Date().getFullYear() // Use new Date().getFullYear() instead of Date.now().getFullYear()
-    console.log('session not selected : ', selectedSession)
-  }
-
-  if (!studentEmail) {
-    studentEmail = email
-  }
+  console.log("Attendance :",attendance)
 
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
       Email: email,
-      year: selectedSession,
-      studentEmail: studentEmail,
     },
   }
 
-  try {
-    // const response = await axios.get(
-    //   'http://localhost:8000/attendance/student',
-    //   config
-    // )
+  const body = {
+    year: selectedSession,
+    className: className,
+    email: studentEmail,
+    attendance: attendance
+  }
 
-    console.log('On fetch page :', response.data.attendance[0].attendance)
-    return response.data.attendance[0].attendance
+  try {
+    const response = await axios.post(
+      'http://localhost:8000/attendance/student',
+      body,config
+    )
+
+    console.log(response)
+    return response
   } catch (error) {
     console.log('error in fetching student Attendance : ', error)
   }

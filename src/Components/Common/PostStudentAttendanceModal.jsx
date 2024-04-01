@@ -1,66 +1,112 @@
-import {useState} from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { handlePostStudentAttendance } from "../../fetching/fetch"; // Importing the API function
 
 const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
-  const [open, setOpen] = useState(status)
-  const [attnd,setAttnd] = useState()
-  console.log('on modal content page :', initialValue)
+  const [open, setOpen] = useState(status);
+  const [attendanceData, setAttendanceData] = useState({});
+  const [presentCount, setPresentCount] = useState({});
+  const [absentCount, setAbsentCount] = useState({});
 
-  const { name, email, className } = initialValue
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+  console.log("Initial value of child: ", initialValue);
+  console.log('hey i am here')
+
+  const { name, email, className } = initialValue;
+ 
+  const monthsWithDays = {
+    Jan: 31,
+    Feb: 28, // 29 in a leap year
+    Mar: 31,
+    Apr: 30,
+    May: 31,
+    Jun: 30,
+    Jul: 31,
+    Aug: 31,
+    Sep: 30,
+    Oct: 31,
+    Nov: 30,
+    Dec: 31,
+  };
 
   const handleClose = () => {
-    setOpen(false)
-    onClose()
-  }
+    setOpen(false);
+    onClose();
+  };
 
- const handleSubmit = (e) => {
-   e.preventDefault()
-   console.log('Form submitted')
-   console.log('Attendance data:', attnd) // Log the attendance data
- }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form submitted");
+    console.log("Attendance data:", attendanceData);
 
+    try {
+      const response = await handlePostStudentAttendance(
+        email,
+        className,
+        attendanceData
+      );
+      console.log(response);
+      handleClose(); // Close the modal after successful submission
+    } catch (error) {
+      console.error(
+        "An error occurred while submitting attendance data:",
+        error
+      );
+    }
+  };
+
+  const handleCheckboxChange = (month, day) => {
+    const newAttendanceData = { ...attendanceData };
+    if (!newAttendanceData[month]) {
+      newAttendanceData[month] = {};
+    }
+    newAttendanceData[month][day] = !newAttendanceData[month][day];
+    setAttendanceData(newAttendanceData);
+
+    // Update present and absent counts
+    const present = Object.values(newAttendanceData[month]).filter(
+      (day) => day
+    ).length;
+    const absent = Object.values(newAttendanceData[month]).filter(
+      (day) => !day
+    ).length;
+    setPresentCount((prevCount) => ({ ...prevCount, [month]: present }));
+    setAbsentCount((prevCount) => ({ ...prevCount, [month]: absent }));
+  };
 
   const date = Array.from({ length: 31 }, (_, index) => (
     <th key={index + 1}>{index + 1}</th>
-  ))
+  ));
 
- const attd = months.map((month, index)=>{
-    const days = Array.from({ length: 31 }, (_, index) => (
-      <td key={index + 1} ><input type='checkbox'/></td>
-    ))
-    return (
-            <tr key={month}>
-              <td>{months[index]}</td>
-              {days}
-              {/* <td>{presentCount}</td>
-              <td>{absentCount}</td> */}
-            </tr>
-          )
- })
-
-
-
- 
-
- 
-
+  const renderAttendanceTable = () => {
+    return Object.entries(monthsWithDays).map(([month, days]) => {
+      const present = presentCount[month] || 0;
+      const absent = days - present;
+      return (
+        <tr key={month}>
+          <td>{month}</td>
+          {Array.from({ length: days }, (_, index) => (
+            <td key={index + 1}>
+              <input
+                type="checkbox"
+                checked={
+                  attendanceData[month] && attendanceData[month][index + 1]
+                }
+                onChange={() => handleCheckboxChange(month, index + 1)}
+              />
+            </td>
+          ))}
+          {Array.from({ length: 31 - days }, (_, index) => (
+            <td key={index + 1}>-</td>
+          ))}
+          <td>{present}</td>
+          <td>{absent}</td>
+        </tr>
+      );
+    });
+  };
 
   return (
     <div>
@@ -73,9 +119,6 @@ const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {name}
           </Typography>
-
-          <Button>Update</Button>
-
           <form className="flex flex-wrap" onSubmit={handleSubmit}>
             <table className="attendance-table m-10">
               <thead>
@@ -86,21 +129,22 @@ const PostStudentAttendanceModal = ({ status, initialValue, onClose }) => {
                   <th>Total Absent</th>
                 </tr>
               </thead>
-              <tbody>{attd}</tbody>
+              <tbody>{renderAttendanceTable()}</tbody>
             </table>
-            <button
+            <Button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              // onClick={handleClose}
+              variant="contained"
+              color="primary"
             >
               Update
-            </button>
+            </Button>
           </form>
-
           <Button onClick={handleClose}>Close</Button>
         </Box>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default PostStudentAttendanceModal
+export default PostStudentAttendanceModal;
