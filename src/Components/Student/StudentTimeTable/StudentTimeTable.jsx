@@ -25,7 +25,41 @@ function StudentTimeTable() {
       'Period-7': 'Music',
       'Period-8': 'Art',
     },
-  }
+    Wednesday: {
+      'Period-1': 'English',
+      'Period-2': 'History',
+      'Period-3': 'Math',
+      'Period-4': 'Science',
+      'LunchBreak': 'Lunch',
+      'Period-5': 'Art',
+      'Period-6': 'Music',
+      'Period-7': 'Computer Science',
+      'Period-8': 'Physical Education',
+    },
+    Thursday: {
+      'Period-1': 'Science',
+      'Period-2': 'English',
+      'Period-3': 'History',
+      'Period-4': 'Math',
+      'LunchBreak': 'Lunch',
+      'Period-5': 'Music',
+      'Period-6': 'Art',
+      'Period-7': 'Physical Education',
+      'Period-8': 'Computer Science',
+    },
+    Friday: {
+      'Period-1': 'Computer Science',
+      'Period-2': 'Physical Education',
+      'Period-3': 'Art',
+      'Period-4': 'Music',
+      'LunchBreak': 'Lunch',
+      'Period-5': 'Math',
+      'Period-6': 'Science',
+      'Period-7': 'English',
+      'Period-8': 'History',
+    }
+};
+
 
   const dayWiseTime = Object.entries(studentClassSchedule).map(([day, schedule]) => {
       return (

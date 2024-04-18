@@ -66,6 +66,6 @@ export default TeacherProfile
 
 export const teacherProfileInfoLoader = async () => {
   
-  const response = await fetch('http://localhost:8000/teacher/profile')
+  const response = await fetch('http://localhost:8000/profile/teacher')
   return response.json()
 }

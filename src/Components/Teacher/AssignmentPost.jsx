@@ -1,11 +1,10 @@
-import * as React from 'react'
-import { useState, useEffect } from 'react'
-import Box from '@mui/material/Box'
-import { DataGrid } from '@mui/x-data-grid'
-import viewIcon from '../../assets/viewIcon.png'
-import editIcon from '../../assets/editIcon.png'
-import ViewStudentResultModal from '../Common/ViewStudentResultModal'
-import { handleAssignmentPost, handleGetAssignment } from '../../fetching/fetch'
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
+import viewIcon from '../../assets/viewIcon.png';
+import deleteIcon from '../../assets/deleteIcon.png';
+import { handleAssignmentPost, handleGetAssignment, handleAssignmentDelete } from '../../fetching/fetch';
 
 const AssignmentPost = () => {
   const [formData, setFormData] = useState({
@@ -15,23 +14,31 @@ const AssignmentPost = () => {
     subject: '',
     className: '',
     assignmentCode: '',
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const res = await handleAssignmentPost(formData)
-      console.log(res)
-      alert('Assignment assigned successfully') // Show success alert
+      const res = await handleAssignmentPost(formData);
+      console.log(res);
+      alert('Assignment assigned successfully'); // Show success alert
+
+      // Fetch the updated assignment list after posting a new assignment
+      const updatedAssignments = await handleGetAssignment(selectedSession);
+      setAssignments(updatedAssignments.map((assignment, index) => ({
+        ...assignment,
+        id: index + 1, // Add 1 to avoid zero-based indexing
+      })));
+
       setFormData({
         // Clear form input details after submission
         title: '',
@@ -40,83 +47,73 @@ const AssignmentPost = () => {
         subject: '',
         className: '',
         assignmentCode: '',
-      })
+      });
     } catch (error) {
-      console.error('Error posting assignment:', error)
+      console.error('Error posting assignment:', error);
     }
-  }
+  };
 
   const generateAssignmentCode = () => {
-    const { subject, className, description } = formData
-    const currentDate = new Date().toISOString().slice(0, 10) // Get current date
+    const { subject, className, description } = formData;
+    const currentDate = new Date().toISOString().slice(0, 10); // Get current date
     const assignmentCode = `${subject.toUpperCase().substring(0, 3)}-${className
       .toUpperCase()
-      .substring(0, 3)}-${currentDate}`
+      .substring(0, 3)}-${currentDate}`;
     setFormData({
       ...formData,
       assignmentCode: assignmentCode,
-    })
-  }
+    });
+  };
 
   // View Assignment
-  const [selectedSession, setSelectedSession] = useState('')
-  const [assignments, setAssignments] = useState([])
-  const [selectedStudent, setSelectedStudent] = useState(null)
-  const yearArray = [2000, 2011, 2019, 2024]
+  const [selectedSession, setSelectedSession] = useState('');
+  const [assignments, setAssignments] = useState([]);
+  const yearArray = [2000, 2011, 2019, 2024];
 
   const years = yearArray.map((year) => (
     <option value={year} key={year}>
       {year}
     </option>
-  ))
+  ));
 
   const handleYearSelect = async (e) => {
-    const selectedYear = e.target.value
-    setSelectedSession(selectedYear)
-  }
+    const selectedYear = e.target.value;
+    setSelectedSession(selectedYear);
+  };
 
   useEffect(() => {
     
      const fetchData = async () => {
        if (selectedSession) {
          try {
-           const response = await handleGetAssignment(selectedSession)
+           const response = await handleGetAssignment(selectedSession);
            const assignmentData = response.map((assignment, index) => ({
              ...assignment,
              id: index + 1, // Add 1 to avoid zero-based indexing
-           }))
-           setAssignments(assignmentData)
+           }));
+           setAssignments(assignmentData);
          } catch (error) {
-           console.error('Error fetching assignment data:', error)
+           console.error('Error fetching assignment data:', error);
          }
        }
-     }
-     fetchData()
-  }, [selectedSession])
+     };
+     fetchData();
+  }, [selectedSession]);
 
-  const displayViewAssignment = (params) => {
-  console.log('Params :', params)
-  // handleGetStudentResult(null, params.email)
-  //   .then((studentResultData) => {
-  //     // console.log(studentResultData.result[0].result)
-  //     const studentDetail = {
-  //       name: params.firstName + ' ' + params.lastName,
-  //       studentClass: 7,
-  //       studentResultData: studentResultData,
-  //     }
-
-  //     setSelectedStudent(
-  //       <ViewStudentResultModal
-  //         status={true}
-  //         initialValue={studentDetail}
-  //         onClose={() => setSelectedStudent(null)}
-  //       />
-  //     )
-  //   })
-  //   .catch((error) => {
-  //     console.log('getting error in fetching student attendance detail', error)
-  //   })
-}
+  const handleDeleteAssignment = async (params) => {
+    const assignmentId = params._id;
+    console.log('here is the id', assignmentId);
+    try {
+      const response = await handleAssignmentDelete(assignmentId);
+      console.log(response);
+      // If the assignment is deleted successfully, remove it from the assignments list
+      setAssignments(prevAssignments => prevAssignments.filter(assignment => assignment._id !== assignmentId));
+      alert("Assignment deleted successfully!");
+    } catch (error) {
+      console.error("Failed to delete Assignment:", error);
+      alert("Error deleting Assignment");
+    }
+  };
 
   const columns = [
     { field: 'className', headerName: 'Class', width: 90 },
@@ -158,7 +155,21 @@ const AssignmentPost = () => {
          
       ),
     },
-  ]
+    {
+      field: 'Delete',
+      headerName: 'Delete',
+      width: 150,
+      renderCell: (params) => (
+          <img
+            src={deleteIcon}
+            onClick={() => handleDeleteAssignment(params.row)}
+            alt="view Icon"
+            style={{ width: 24, height: 24, cursor: 'pointer' }}
+          />
+         
+      ),
+    },
+  ];
 
   return (
     <>
@@ -166,7 +177,7 @@ const AssignmentPost = () => {
         <div className="col-span-4">
           {' '}
           {/* Assigning 4 parts to the form */}
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto mt-6 ml-8">
             <h2 className="text-lg font-semibold mb-4">Assign an Assignment</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -235,6 +246,7 @@ const AssignmentPost = () => {
                   value={formData.deadline}
                   onChange={handleChange}
                   className="border border-gray-300 rounded px-3 py-2 w-full"
+                  required
                 />
               </div>
               <div>
@@ -285,7 +297,7 @@ const AssignmentPost = () => {
               </select>
             </div>
           </div>
-          <Box sx={{ height: 400, width: '100%' }}>
+          <Box className="m-10 rounded-md" sx={{ height: 400 }}>
             <DataGrid
               rows={assignments}
               columns={columns}
@@ -294,11 +306,10 @@ const AssignmentPost = () => {
               disableRowSelectionOnClick
             />
           </Box>
-          {selectedStudent}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default AssignmentPost
+export default AssignmentPost;

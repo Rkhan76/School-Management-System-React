@@ -1,31 +1,45 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
+import React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 const ViewStudentResultModal = ({ status, initialValue, onClose }) => {
-  const [open, setOpen] = React.useState(status)
-  const { name, studentResultData } = initialValue
-  const results = studentResultData.result[0].result
+  const [open, setOpen] = React.useState(status);
+  const { name, studentResultData } = initialValue;
 
   const handleClose = () => {
-    setOpen(false)
-    onClose()
+    setOpen(false);
+    onClose();
+  };
+
+  // Check if studentResultData exists
+  if (!studentResultData) {
+    // If studentResultData is not present, show an alert and return null
+    alert('Data not available');
+    return null;
   }
 
-  // Calculate total internal and external marks
-  let totalInternalMarks = 0
-  let totalExternalMarks = 0
+  const results = studentResultData.result[0].result;
+
+  // Initialize total marks counters
+  let totalInternalMarks = 0;
+  let totalExternalMarks = 0;
+  let totalPossibleInternalMarks = 0;  // Sum of maximum possible internal marks
+  let totalPossibleExternalMarks = 0;  // Sum of maximum possible external marks
+
   results.forEach((result) => {
-    totalInternalMarks += result.internalMarks
-    totalExternalMarks += result.externalMarks
-  })
+    totalInternalMarks += result.internalMarks;
+    totalExternalMarks += result.externalMarks;
+    totalPossibleInternalMarks += result.totalInternalMarks;
+    totalPossibleExternalMarks += result.totalExternalMarks;
+  });
 
   return (
     <div>
       <Modal
         open={open}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -84,10 +98,10 @@ const ViewStudentResultModal = ({ status, initialValue, onClose }) => {
                   Total
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {totalInternalMarks}/{results.length * 100}
+                  {totalInternalMarks}/{totalPossibleInternalMarks}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {totalExternalMarks}/{results.length * 100}
+                  {totalExternalMarks}/{totalPossibleExternalMarks}
                 </td>
               </tr>
             </tbody>
@@ -98,7 +112,7 @@ const ViewStudentResultModal = ({ status, initialValue, onClose }) => {
         </Box>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default ViewStudentResultModal
+export default ViewStudentResultModal;

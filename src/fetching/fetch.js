@@ -186,6 +186,7 @@ export async function handleGetStudentResult(
       'http://localhost:8000/result',
       config
     )
+    
 
     console.log('On fetch page :', response.data.result[0].result)
     return response.data
@@ -305,6 +306,173 @@ export async function handleGetAssignment(selectedSession) {
     console.log('error in fetching student Attendance : ', error)
   }
 }
+
+export async function handleNoticePost(
+  noticeData
+) {
+ 
+  const { token, email } = Getcretendials()
+  
+  
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  };
+  
+  
+
+  try {
+    const response = await axios.post('http://localhost:8000/notice', {...noticeData, email}, { headers: headers });
+            console.log(response.data.notice);
+        } catch (error) {
+            console.error('Failed to publish notice:', error);
+            alert('Error publishing notice');
+        }
+}
+
+export async function handleNoticeGet(){
+  const { token, email } = Getcretendials()
+  
+  const headers = {
+    Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  };
+
+  try {
+    const response = await axios.get('http://localhost:8000/notice', { headers: headers})
+
+    return response.data.notice
+  } catch (error) {
+    console.log('error in fetching notice : ', error)
+  }
+}
+
+export async function handleNoticeDelete(noticeId){
+  const { token, email } = Getcretendials();
+  console.log('noticeId :', noticeId)
+  
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+
+  try {
+    const response = await axios.delete(`http://localhost:8000/notice/${noticeId}`, { headers: headers });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log('error in deleting notice: ', error);
+    throw error; // Rethrow the error to handle it in the component
+  }
+}
+
+export async function handleAssignmentDelete(assignmentId){
+  const { token, email } = Getcretendials();
+  console.log('assignemtId :', assignmentId)
+  
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+
+  try {
+    const response = await axios.delete(`http://localhost:8000/assignment/${assignmentId}`, { headers: headers });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log('error in deleting notice: ', error);
+    throw error; // Rethrow the error to handle it in the component
+  }
+}
+
+export async function handleGetAssignmentByStudent(selectedSession) {
+  console.log('checking selectedSession becuase it is necessary', selectedSession)
+  const { token, email, studentClass } = Getcretendials()
+  console.log(Getcretendials())
+
+  // If selectedSession is falsy (null or undefined), set it to the current year
+  if (!selectedSession) {
+    selectedSession = new Date().getFullYear() // Use new Date().getFullYear() instead of Date.now().getFullYear()
+    console.log('session not selected : ', selectedSession)
+  }
+
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email,
+      year: selectedSession,
+      studentClass: studentClass
+    },
+  }
+
+  try {
+    const response = await axios.get('http://localhost:8000/assignment', config)
+
+    console.log('On fetch page :', response.data.assignments)
+    return response.data.assignments
+  } catch (error) {
+    console.log('error in fetching student Attendance : ', error)
+  }
+}
+
+
+
+
+
+
+export async function handleResultDelete(studentEmail){
+  const { token, email } = Getcretendials();
+  console.log('assignemtId on fetch :', studentEmail)
+  
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+
+  try {
+    const response = await axios.delete(`http://localhost:8000/result/${studentEmail}`, { headers: headers });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log('error in deleting notice: ', error);
+    throw error; // Rethrow the error to handle it in the component
+  }
+}
+
+export async function handleGetTimeTableByStudent() {
+  const { token, email, studentClass } = Getcretendials();
+  // const studentClass = GetStudentClass(); // Assuming GetStudentClass() retrieves the student's class
+
+  console.log('checking selectedSession because it is necessary', studentClass);
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email
+    }
+  };
+
+  try {
+    const response = await axios.get(`http://localhost:8000/time-table/${studentClass}`, config);
+    console.log('On fetch page:', response.data.timeTable); // Assuming response contains timetable data
+    return response.data.timeTable;
+  } catch (error) {
+    console.log('Error in fetching student timetable:', error);
+    // Handle error as needed
+  }
+}
+
+
+
+
+
+
+
+
 
 
 

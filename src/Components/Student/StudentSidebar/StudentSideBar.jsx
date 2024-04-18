@@ -38,7 +38,7 @@ function StudentSideBar() {
       <SideBarComponent
         componentName="Time-Table"
         componentIcon={timeTableIcon}
-        to="/student/timetable"
+        to="/student/time-table"
       />
       <SideBarComponent
         componentName="Assignment"

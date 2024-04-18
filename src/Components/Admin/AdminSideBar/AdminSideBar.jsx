@@ -2,6 +2,17 @@ import React from 'react'
 
 import SideBarHeader from '../../Common/sideBarHeader/SideBarHeader'
 import SideBarComponent from '../../Common/sideBarComponent/SideBarComponent'
+import dashBoardIcon from "../../../assets/dashBoardIcon.svg"
+import profileIcon from '../../../assets/profileIcon.svg'
+import resultIcon from '../../../assets/resultIcon.svg'
+import timeTableIcon from '../../../assets/timeTableIcon.svg'
+import assignmentIcon from '../../../assets/assignmentIcon.svg'
+import noticeIcon from '../../../assets/noticeIcon.svg'
+import feedbackIcon from '../../../assets/feedbackIcon.svg'
+import attendenceIcon from '../../../assets/attendenceIcon.svg'
+
+
+
 
 function AdminSideBar() {
   return (
@@ -14,18 +25,19 @@ function AdminSideBar() {
       <SideBarComponent componentName="Profile" componentIcon={profileIcon} />
       <SideBarComponent
         componentName="Attendence"
-        componentIcon={attedenceIcon}
+        componentIcon={attendenceIcon}
       />
-      <SideBarComponent componentName="Result" componentIcon={resultIcon} />
+      <SideBarComponent componentName="Result" to="/admin/result" componentIcon={resultIcon} />
       <SideBarComponent
         componentName="Time-Table"
         componentIcon={timeTableIcon}
+        to="/admin/time-table"
       />
       <SideBarComponent
         componentName="Assignment"
         componentIcon={assignmentIcon}
       />
-      <SideBarComponent componentName="Notice" componentIcon={noticeIcon} />
+      <SideBarComponent componentName="Notice" componentIcon={noticeIcon} to="/admin/notice" />
       <SideBarComponent componentName="Feedback" componentIcon={feedbackIcon} />
     </div>
   )
