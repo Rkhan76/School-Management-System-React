@@ -25,8 +25,8 @@ function Navbar() {
       <div className="flex gap-6 mt-2">
         <div className="flex gap-2">
           <div>
-            <h1>Steven zone</h1>
-            <p>Admin</p>
+            <h1>Aditya</h1>
+            <p>Teacher</p>
           </div>
           <img
             className="h-3 w-3 mt-1"

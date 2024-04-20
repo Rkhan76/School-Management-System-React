@@ -50,11 +50,11 @@ function StudentSideBar() {
         componentIcon={noticeIcon}
         to="/student/notice"
       />
-      <SideBarComponent
+      {/* <SideBarComponent
         componentName="Feedback"
         componentIcon={feedbackIcon}
         to="/student/feedback"
-      />
+      /> */}
     </div>
   )
 }

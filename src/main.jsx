@@ -40,6 +40,7 @@ import AdminNotice from "./Components/Admin/AdminNotice.jsx";
 import StudentResultAdmin from "./Components/Admin/StudentResultAdmin.jsx";
 import TimeTableAdmin from "./Components/Admin/TimeTableAdmin.jsx";
 import TimeTableStudent from "./Components/Student/TimeTableStudent.jsx";
+import AssignmentAdmin from "./Components/Admin/AssignmentAdmin.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -88,6 +89,7 @@ const router = createBrowserRouter(
           <Route path="notice" element={<AdminNotice />}/>
           <Route path="result" element={<StudentResultAdmin />}/>
           <Route path="time-table" element={<TimeTableAdmin/>}/>
+          <Route path="assignment" element={<AssignmentAdmin/>}/>
         </Route>
       </Route>
     </>

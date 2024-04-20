@@ -279,7 +279,7 @@ export async function handleAssignmentPost(
 
 export async function handleGetAssignment(selectedSession) {
   console.log('checking selectedSession', selectedSession)
-  const { token, email } = Getcretendials()
+  const { token, email,role } = Getcretendials()
 
   // If selectedSession is falsy (null or undefined), set it to the current year
   if (!selectedSession) {
@@ -294,6 +294,7 @@ export async function handleGetAssignment(selectedSession) {
       'Content-Type': 'application/json',
       Email: email,
       year: selectedSession,
+      role: role
     },
   }
 
@@ -465,6 +466,20 @@ export async function handleGetTimeTableByStudent() {
     // Handle error as needed
   }
 }
+
+export const handleSubmitStudentAssignment = async (data) => {
+  const { token, email, studentClass } = Getcretendials();
+  try {
+    const response = await axios.post("http://localhost:8000/assignment/submit", {
+      ...data,
+      studentEmail:email,
+      
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Error submitting assignment:", error);
+  }
+};
 
 
 

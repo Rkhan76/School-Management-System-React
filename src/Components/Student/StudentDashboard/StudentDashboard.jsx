@@ -44,7 +44,7 @@ function StudentDashboard() {
         title="Notice"
         to="/student/notice"
       />
-      <DashboardPageComponents
+      {/* <DashboardPageComponents
         icon={feedbackIcon}
         title="Teacher Feedback"
         to="/student/feedback"
@@ -52,7 +52,7 @@ function StudentDashboard() {
       <DashboardPageComponents
         icon={passwordChangeIcon}
         title="Change Password"
-      />
+      /> */}
     </div>
   )
 }

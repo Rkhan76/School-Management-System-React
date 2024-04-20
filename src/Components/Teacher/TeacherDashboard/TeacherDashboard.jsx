@@ -21,21 +21,21 @@ function TeacherDashboard() {
         title="Profile"
         to="/teacher/profile"
       />
-      <DashboardPageComponents
+      {/* <DashboardPageComponents
         icon={teacherAttendence}
         title="Attendence"
         to="/teacher/profile"
-      />
-      <DashboardPageComponents
+      /> */}
+      {/* <DashboardPageComponents
         icon={teacherSchedule}
         title="Time Table"
         to="/teacher/profile"
-      />
-      <DashboardPageComponents
+      /> */}
+      {/* <DashboardPageComponents
         icon={studentDetails}
         title="Student Details"
         to="/teacher/profile"
-      />
+      /> */}
       <DashboardPageComponents
         icon={attedenceIcon}
         title="Student Attendence"
@@ -60,7 +60,7 @@ function TeacherDashboard() {
         title="Notice"
         to="/teacher/profile"
       />
-      <DashboardPageComponents
+      {/* <DashboardPageComponents
         icon={teacherReviews}
         title="Reviews"
         to="/teacher/profile"
@@ -69,7 +69,7 @@ function TeacherDashboard() {
         icon={passwordChangeIcon}
         title="Change Password"
         to="/teacher/profile"
-      />
+      /> */}
     </div>
   )
 }

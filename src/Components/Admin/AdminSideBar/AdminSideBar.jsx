@@ -36,9 +36,10 @@ function AdminSideBar() {
       <SideBarComponent
         componentName="Assignment"
         componentIcon={assignmentIcon}
+        to="/admin/assignment"
       />
       <SideBarComponent componentName="Notice" componentIcon={noticeIcon} to="/admin/notice" />
-      <SideBarComponent componentName="Feedback" componentIcon={feedbackIcon} />
+      <SideBarComponent componentName="User Detail" componentIcon={feedbackIcon} />
     </div>
   )
 }

@@ -27,21 +27,21 @@ function TeacherSideBar() {
         componentIcon={profileIcon}
         to="/teacher/profile"
       />
-      <SideBarComponent
+      {/* <SideBarComponent
         componentName="Attendence"
         componentIcon={attedenceIcon}
         to="/teacher/attendence"
-      />
-      <SideBarComponent
+      /> */}
+      {/* <SideBarComponent
         componentName="Time-Table"
         componentIcon={timeTableIcon}
         to="/teacher/time-table"
-      />
-      <SideBarComponent
+      /> */}
+      {/* <SideBarComponent
         componentName="Student Details"
         componentIcon={studentDetails}
         to=""
-      />
+      /> */}
       <SideBarComponent
         componentName="Student Attd"
         componentIcon={attedenceIcon}
@@ -64,11 +64,11 @@ function TeacherSideBar() {
         componentIcon={noticeIcon}
         to="/teacher/notice"
       />
-      <SideBarComponent
+      {/* <SideBarComponent
         componentName="Feedback"
         componentIcon={feedbackIcon}
         to="/teacher/feedback"
-      />
+      /> */}
     </div>
   )
 }
