@@ -28,19 +28,19 @@ import ParentsDashboard from "./Components/Parents/ParentsDashboard/ParentsDashb
 import AdminHome from "./Components/Admin/AdminHome/AdminHome.jsx";
 import AdminDashboard from "./Components/Admin/AdminDashboard/AdminDashboard.jsx";
 import ParentsProfile from "./Components/Parents/ParentsProfile/ParentsProfile.jsx";
-import TeacherProfile, {
-  teacherProfileInfoLoader,
-} from "./Components/Teacher/TeacherProfile/TeacherProfile.jsx";
+import TeacherProfile from "./Components/Teacher/TeacherProfile/TeacherProfile.jsx";
 import AdminProfile from "./Components/Admin/AdminProfile/AdminProfile.jsx";
 import SignIn from "./Components/SignIn/SignIn.jsx";
 import SignUp from "./Components/SignUp/SignUp.jsx";
 import { handleGetStudentProfile } from "./fetching/fetch";
 import StudentAttendancePost from "./Components/Teacher/StudentAttendancePost.jsx";
 import AdminNotice from "./Components/Admin/AdminNotice.jsx";
+import UserDetails from "./Components/Admin/UserDetails.jsx"
 import StudentResultAdmin from "./Components/Admin/StudentResultAdmin.jsx";
 import TimeTableAdmin from "./Components/Admin/TimeTableAdmin.jsx";
 import TimeTableStudent from "./Components/Student/TimeTableStudent.jsx";
 import AssignmentAdmin from "./Components/Admin/AssignmentAdmin.jsx";
+import TimeTableStudentByTeacher from "./Components/Teacher/TimeTableStudentByTeacher.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -64,13 +64,13 @@ const router = createBrowserRouter(
         <Route path="teacher" element={<TeacherHome />}>
           <Route path="" element={<TeacherDashboard />} />
           <Route
-            loader={teacherProfileInfoLoader}
+            // loader={teacherProfileInfoLoader}
             path="profile"
             element={<TeacherProfile />}
           />
           <Route path="notice" element={<Notice />} />
           <Route path="profile" element={<TeacherProfile />} />
-          <Route path="profile" element={<TeacherProfile />} />
+          <Route path="time-table" element={<TimeTableStudentByTeacher/>} />
           <Route
             path="student-attendance"
             element={<StudentAttendancePost />}
@@ -90,6 +90,7 @@ const router = createBrowserRouter(
           <Route path="result" element={<StudentResultAdmin />}/>
           <Route path="time-table" element={<TimeTableAdmin/>}/>
           <Route path="assignment" element={<AssignmentAdmin/>}/>
+          <Route path="userdetail" element={<UserDetails/>}/>
         </Route>
       </Route>
     </>

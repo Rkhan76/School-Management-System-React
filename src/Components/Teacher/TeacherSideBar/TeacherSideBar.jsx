@@ -32,11 +32,11 @@ function TeacherSideBar() {
         componentIcon={attedenceIcon}
         to="/teacher/attendence"
       /> */}
-      {/* <SideBarComponent
-        componentName="Time-Table"
+      <SideBarComponent
+        componentName="Std Time-Table"
         componentIcon={timeTableIcon}
         to="/teacher/time-table"
-      /> */}
+      />
       {/* <SideBarComponent
         componentName="Student Details"
         componentIcon={studentDetails}

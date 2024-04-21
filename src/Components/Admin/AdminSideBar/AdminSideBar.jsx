@@ -22,7 +22,7 @@ function AdminSideBar() {
         componentName="Dashboard"
         componentIcon={dashBoardIcon}
       />
-      <SideBarComponent componentName="Profile" componentIcon={profileIcon} />
+      <SideBarComponent componentName="Profile" componentIcon={profileIcon} to="/admin/profile" />
       <SideBarComponent
         componentName="Attendence"
         componentIcon={attendenceIcon}
@@ -39,7 +39,7 @@ function AdminSideBar() {
         to="/admin/assignment"
       />
       <SideBarComponent componentName="Notice" componentIcon={noticeIcon} to="/admin/notice" />
-      <SideBarComponent componentName="User Detail" componentIcon={feedbackIcon} />
+      <SideBarComponent componentName="User Detail" componentIcon={feedbackIcon} to="/admin/userdetail" />
     </div>
   )
 }

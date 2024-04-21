@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-function TimeTableAdmin() {
+function TimeTableStudentByTeacher() {
   const [className, setClassName] = useState('');
   const [schedule, setSchedule] = useState({
     Monday: new Array(8).fill(''),
@@ -113,19 +113,18 @@ function TimeTableAdmin() {
       alert('Failed to submit schedule. Check console for more details.');
     }
   };
-  
-  
 
   return (
     <div className="mx-auto max-w-6xl">
-      <div className="m-10 bg-gray-400 rounded-md">
-        <h1 className="p-5 text-3xl">Student Result</h1>
-        <div className="p-4">
-          <label className="p-4 text-lg" htmlFor="Session">
-            Select Class
+      <div className="m-10 bg-gray-400 rounded-md p-8">
+        <h1 className="text-3xl mb-4">Student Result</h1>
+        <div className="flex items-center">
+          <label className="text-lg mr-4" htmlFor="classSelect">
+            Select Class:
           </label>
           <select
-            className="p-2 w-80 rounded-sm outline-none"
+            id="classSelect"
+            className="p-2 w-60 rounded-sm outline-none"
             onChange={handleClassSelect}
             value={selectedClass}
           >
@@ -138,7 +137,7 @@ function TimeTableAdmin() {
         <h2 className="text-lg font-bold mb-4 text-center">Timetable</h2>
         {timetableData && (
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-500">
+            <table className="w-full border-collapse border border-gray-500 table-fixed">
               <thead>
                 <tr>
                   <th className="border border-gray-500"></th>
@@ -162,78 +161,9 @@ function TimeTableAdmin() {
             </table>
           </div>
         )}
-        <button onClick={() => setOpenModal(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 block mx-auto">
-          Update Timetable
-        </button>
-        {openModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-8 rounded-lg w-11/12 max-w-4xl h-5/6 overflow-y-auto">
-              <div className="flex justify-end mb-4">
-                <button onClick={() => setOpenModal(false)} className="text-gray-500 hover:text-gray-700 focus:outline-none">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <h2 className="text-lg font-bold mb-4">Update Timetable</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-6">
-                  <label className="block text-lg font-bold text-blue-700 mb-2">Class:</label>
-                  <select
-                    className="w-full p-2 border border-gray-300 rounded"
-                    value={className}
-                    onChange={handleClassNameChange}
-                    required
-                  >
-                    <option value="">select the class</option>
-                    {[...Array(10).keys()].map(num => (
-                      <option key={num} value={num + 1}>
-                        {num + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {daysOfWeek.map(day => (
-                  <div key={day} className="mb-6">
-                    <h3 className="font-bold text-lg mb-2 text-blue-700">{day}</h3>
-                    <div className="grid grid-cols-4 gap-4">
-                      {schedule[day].map((value, period) => {
-                        return (
-                          <div key={period} className="flex items-center">
-                            <label className="inline-block w-32 mr-2 font-medium">
-                              {period === 4 ? 'Lunch Break' : `Period ${period + 1}:`}
-                            </label>
-                            <input
-                              type="text"
-                              className="flex-1 p-2 border border-gray-300 rounded mr-4"
-                              value={value}
-                              onChange={(e) => setSchedule(prevSchedule => ({
-                                ...prevSchedule,
-                                [day]: prevSchedule[day].map((item, index) => {
-                                  if (index === period) return e.target.value;
-                                  return item;
-                                })
-                              }))}
-                              required={!value && period !== 4}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-                <div className="flex justify-end">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Submit Schedule
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
-export default TimeTableAdmin;
+export default TimeTableStudentByTeacher;

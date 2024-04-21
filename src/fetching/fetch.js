@@ -458,9 +458,9 @@ export async function handleGetTimeTableByStudent() {
   };
 
   try {
-    const response = await axios.get(`http://localhost:8000/time-table/${studentClass}`, config);
-    console.log('On fetch page:', response.data.timeTable); // Assuming response contains timetable data
-    return response.data.timeTable;
+    const response = axios.get(`http://localhost:8000/time-table?class=${studentClass}`);
+    console.log('On fetch page:', response); // Assuming response contains timetable data
+    return response
   } catch (error) {
     console.log('Error in fetching student timetable:', error);
     // Handle error as needed
@@ -480,6 +480,81 @@ export const handleSubmitStudentAssignment = async (data) => {
     throw new Error("Error submitting assignment:", error);
   }
 };
+
+
+export async function handleGetAdminProfile() {
+  const { token, email } = Getcretendials()
+  console.log("here on handleGetStudentProfile :", email)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email,
+    },
+  }
+
+  try {
+    const response = await axios.get(
+      'http://localhost:8000/profile/admin',
+      config
+    )
+    console.log("on admin profile fetch funtion",response.data)
+    return response.data
+  } catch (error) {
+    console.error('Error fetching admin profile:', error)
+    throw error 
+  }
+}
+
+
+export async function handleGetUserDetail(){
+  const { token, email } = Getcretendials()
+  console.log("here on handleGetStudentProfile :", email)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Email: email,
+    },
+  }
+
+  try {
+    const response = await axios.get(
+      'http://localhost:8000/user-details', // <--- Endpoint is '/user-details'
+      config
+    )
+    console.log("User details:",response.data)
+    return response.data
+  } catch (error) {
+    console.error('Error fetching user details:', error)
+    throw error 
+  }
+}
+
+
+
+export async function handleGetUserProfile(email, role) {
+  try {
+    const response = await axios.get(`http://localhost:8000/user-details/profile/${email}?role=${role}`);
+    console.log(response)
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching user profile: " + error.message);
+  }
+}
+
+
+export async function handleDeleteUserProfile(email, role) {
+  try {
+    const response = await axios.delete(`http://localhost:8000/user-details/profile/${email}/${role}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error deleting user profile: " + error.message);
+  }
+}
+
+
+
 
 
 
